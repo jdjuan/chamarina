@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: "Praxis Chamarina | Klinische Psychologie in Wien",
   description:
     "Klinisch-psychologische Behandlung und Diagnostik für Erwachsene in Wien.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

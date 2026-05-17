@@ -89,6 +89,21 @@ const processSteps = [
   },
 ];
 
+const practiceNotes = [
+  {
+    title: "Zum Termin",
+    text: "Bitte kommen Sie nicht deutlich vor dem vereinbarten Termin, da ich in der Regel noch in einer laufenden Einheit bin.",
+  },
+  {
+    title: "Barrierefreiheit",
+    text: "Die Praxis ist leider nicht barrierefrei.",
+  },
+  {
+    title: "Absage",
+    text: "Vereinbarte Termine sind verbindlich. Bitte sagen Sie mindestens 24 Stunden im Voraus ab. Kurzfristig abgesagte oder nicht wahrgenommene Termine werden in Rechnung gestellt.",
+  },
+];
+
 const faqItems = [
   {
     question: "Muss ich schon genau wissen, worüber ich sprechen möchte?",
@@ -140,25 +155,30 @@ const faqItems = [
   },
 ];
 
-function SectionHeader({
+function SectionIntro({
   eyebrow,
   title,
   children,
+  align = "left",
 }: {
   eyebrow: string;
   title: string;
   children?: ReactNode;
+  align?: "left" | "center";
 }) {
   return (
-    <div className="max-w-3xl">
-      <p className="text-sm font-semibold uppercase text-[#d7192a]">
+    <div
+      className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}
+    >
+      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d7192a]">
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#172023] sm:text-4xl">
+      <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight text-[#18272b] sm:text-5xl">
         {title}
       </h2>
+      <div className="mt-5 h-px w-36 bg-[#8290b0]" />
       {children ? (
-        <div className="mt-5 text-base leading-8 text-[#4b5659] sm:text-lg">
+        <div className="mt-6 text-base leading-8 text-[#4a595d] sm:text-lg">
           {children}
         </div>
       ) : null}
@@ -166,70 +186,81 @@ function SectionHeader({
   );
 }
 
-function ArrowLink({
-  href,
-  children,
-  variant = "primary",
-}: {
-  href: string;
-  children: ReactNode;
-  variant?: "primary" | "secondary";
-}) {
-  const className =
-    variant === "primary"
-      ? "bg-[#d7192a] text-white shadow-[0_18px_35px_rgba(215,25,42,0.28)] hover:bg-[#b91424]"
-      : "border border-white/60 bg-white/10 text-white backdrop-blur hover:bg-white/18";
-
+function TextLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <a
-      className={`inline-flex min-h-12 items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition ${className}`}
+      className="group inline-flex items-center gap-3 text-sm font-semibold text-[#18272b]"
       href={href}
     >
-      {children}
-      <span aria-hidden="true" className="ml-2">
+      <span className="border-b border-[#d7192a] pb-1 transition group-hover:text-[#d7192a]">
+        {children}
+      </span>
+      <span
+        aria-hidden="true"
+        className="text-[#d7192a] transition group-hover:translate-x-1"
+      >
         -&gt;
       </span>
     </a>
   );
 }
 
-function Pill({ children }: { children: ReactNode }) {
+function ButtonLink({
+  href,
+  children,
+  variant = "outline",
+}: {
+  href: string;
+  children: ReactNode;
+  variant?: "outline" | "solid";
+}) {
+  const classes =
+    variant === "solid"
+      ? "border-[#d7192a] bg-[#d7192a] text-white shadow-[0_14px_30px_rgba(215,25,42,0.22)] hover:bg-[#b91424]"
+      : "border-[#18272b] bg-transparent text-[#18272b] hover:border-[#d7192a] hover:text-[#d7192a]";
+
   return (
-    <li className="rounded-full border border-[#d8ded6] bg-white px-4 py-2 text-sm font-medium text-[#334044]">
+    <a
+      className={`inline-flex min-h-12 items-center justify-center rounded-full border px-7 py-3 text-sm font-semibold transition ${classes}`}
+      href={href}
+    >
       {children}
-    </li>
+    </a>
   );
 }
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#fbfbf8] text-[#172023]">
-      <header className="sticky top-0 z-50 border-b border-[#e4e7e1] bg-[#fbfbf8]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-3 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-          <a className="flex items-center gap-3" href="#start">
+    <main className="min-h-screen overflow-x-hidden bg-[#f8fbfa] text-[#18272b]">
+      <header className="sticky top-0 z-50 border-b border-[#d7e0e2] bg-[#eef6f7]/92 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-10">
+          <a className="flex items-center gap-4" href="#start">
             <Image
               src="/images/logo.png"
               alt="Praxis Chamarina Logo"
-              width={54}
-              height={54}
+              width={64}
+              height={64}
               priority
-              className="h-12 w-12"
+              className="h-14 w-14"
             />
-            <div>
-              <p className="text-base font-semibold text-[#172023]">
+            <div className="leading-none">
+              <p className="font-serif text-xl font-semibold italic text-[#18272b]">
                 Praxis Chamarina
               </p>
-              <p className="text-sm text-[#657174]">Klinische Psychologie</p>
+              <p className="mt-1 text-[0.68rem] uppercase tracking-[0.38em] text-[#63708f]">
+                Psychologie
+              </p>
             </div>
           </a>
-          <div className="flex items-center gap-3 pb-1 lg:pb-0">
+
+          <div className="hidden flex-col gap-3 lg:flex lg:flex-row lg:items-center">
             <nav
               aria-label="Hauptnavigation"
-              className="flex flex-wrap items-center gap-1 text-sm font-medium text-[#4b5659] lg:flex-nowrap"
+              className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold text-[#18272b] lg:gap-x-8"
             >
               {navItems.map((item) => (
                 <a
-                  className="rounded-full px-2.5 py-2 transition hover:bg-[#edf2ee] hover:text-[#172023] sm:px-3"
+                  className="border-b border-transparent pb-1 transition hover:border-[#d7192a] hover:text-[#d7192a]"
                   href={item.href}
                   key={item.href}
                 >
@@ -238,17 +269,53 @@ export default function Home() {
               ))}
             </nav>
             <a
-              className="hidden min-h-11 shrink-0 items-center justify-center rounded-full bg-[#172023] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#334044] sm:inline-flex"
+              className="hidden min-h-11 items-center justify-center rounded-full border border-[#18272b] px-5 py-2 text-sm font-semibold transition hover:border-[#d7192a] hover:text-[#d7192a] lg:inline-flex"
               href="mailto:kontakt@chamarina.at?subject=Termin%20buchen"
             >
               Termin buchen
             </a>
           </div>
+
+          <details className="group relative lg:hidden">
+            <summary
+              aria-label="Navigation öffnen"
+              className="flex h-12 w-12 cursor-pointer list-none items-center justify-center border border-[#18272b] text-2xl leading-none text-[#18272b]"
+            >
+              <span aria-hidden="true" className="group-open:hidden">
+                ≡
+              </span>
+              <span aria-hidden="true" className="hidden group-open:block">
+                ×
+              </span>
+            </summary>
+            <div className="absolute right-0 top-14 w-[min(82vw,310px)] border border-[#c9d2d4] bg-[#f8fbfa] p-5 shadow-[0_20px_45px_rgba(24,39,43,0.14)]">
+              <nav
+                aria-label="Mobile Navigation"
+                className="grid gap-3 text-base font-semibold text-[#18272b]"
+              >
+                {navItems.map((item) => (
+                  <a
+                    className="border-b border-[#d7e0e2] pb-3 transition hover:text-[#d7192a]"
+                    href={item.href}
+                    key={item.href}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <a
+                  className="mt-2 inline-flex min-h-11 items-center justify-center rounded-full bg-[#d7192a] px-5 py-2 text-sm font-semibold text-white"
+                  href="mailto:kontakt@chamarina.at?subject=Termin%20buchen"
+                >
+                  Termin buchen
+                </a>
+              </nav>
+            </div>
+          </details>
         </div>
       </header>
 
       <section
-        className="relative isolate flex min-h-[78svh] scroll-mt-28 items-center overflow-hidden bg-[#0e1b1d] text-white"
+        className="relative isolate min-h-[calc(100svh-88px)] scroll-mt-28 overflow-hidden bg-[#e8f2f3]"
         id="start"
       >
         <Image
@@ -257,114 +324,140 @@ export default function Home() {
           fill
           loading="eager"
           preload
+          unoptimized
           sizes="100vw"
-          className="object-cover object-center opacity-72"
+          className="object-cover object-center opacity-35"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(14,27,29,0.88)_0%,rgba(14,27,29,0.68)_42%,rgba(14,27,29,0.16)_100%)]" />
-        <div className="relative mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase text-[#f0b7bd]">
-              Praxis Chamarina - Wien, 1. Bezirk
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(232,242,243,0.96)_0%,rgba(232,242,243,0.82)_46%,rgba(232,242,243,0.38)_100%)]" />
+        <div className="relative mx-auto grid min-h-[calc(100svh-88px)] max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-10">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#d7192a]">
+              Klinische Psychologie in Wien
             </p>
-            <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Klinisch-psychologische Behandlung & Diagnostik in Wien
+            <h1 className="mt-8 text-[#0d1517]">
+              <span className="block font-serif text-6xl font-semibold italic leading-none sm:text-7xl lg:text-8xl">
+                Begleitung
+              </span>
+              <span className="mt-5 block h-px w-64 bg-[#18272b]" />
+              <span className="mt-6 block max-w-xl text-4xl font-light leading-tight sm:text-5xl">
+                für Verstehen, Stabilität und Veränderung
+              </span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/86 sm:text-xl">
-              Unterstützung bei Angst, Zwang, Depression,
-              Beziehungsthemen, Sexualität und anderen psychischen
-              Belastungen.
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[#263a3f]">
+              Klinisch-psychologische Behandlung und Diagnostik für Erwachsene:
+              Unterstützung bei Angst, Zwang, Depression, Beziehungsthemen,
+              Sexualität und anderen psychischen Belastungen.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ArrowLink href="mailto:kontakt@chamarina.at?subject=Termin%20buchen">
-                Termin buchen
-              </ArrowLink>
-              <ArrowLink href="#diagnostik" variant="secondary">
-                Mehr zur Diagnostik
-              </ArrowLink>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink
+                href="mailto:kontakt@chamarina.at?subject=Termin%20buchen"
+                variant="solid"
+              >
+                Erstgespräch vereinbaren
+              </ButtonLink>
+              <ButtonLink href="#diagnostik">Mehr zur Diagnostik</ButtonLink>
+            </div>
+          </div>
+
+          <div className="relative hidden min-h-[620px] lg:block">
+            <div className="absolute bottom-0 right-8 h-[560px] w-[430px] overflow-hidden border-b border-[#18272b] bg-[#dcebed]">
+              <Image
+                src="/images/maria.png"
+                alt="Maria Chamarina"
+                fill
+                priority
+                unoptimized
+                sizes="430px"
+                className="object-cover object-top"
+              />
+            </div>
+            <div className="absolute right-0 top-24 h-32 w-32 border border-[#8290b0]" />
+            <div className="absolute bottom-16 left-4 max-w-56 border-l-2 border-[#d7192a] bg-[#f8fbfa]/80 p-5 backdrop-blur">
+              <p className="text-sm font-semibold text-[#18272b]">
+                Vor Ort im 1. Bezirk oder online nach Absprache.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-[#e4e7e1] bg-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
-          <div>
-            <SectionHeader
-              eyebrow="Willkommen"
-              title="Schön, dass Sie hier sind."
-            >
-              <p>
-                Ich bin klinische Psychologin und biete psychologische
-                Therapie sowie diagnostische Abklärung für Erwachsene in Wien
-                an. Psychologische Unterstützung soll verständlich,
-                transparent und individuell bleiben: ohne unnötige Distanz,
-                aber mit fachlicher Klarheit.
-              </p>
-            </SectionHeader>
-            <ul className="mt-8 flex flex-wrap gap-3">
-              {supportTopics.map((topic) => (
-                <Pill key={topic}>{topic}</Pill>
-              ))}
-            </ul>
-          </div>
+      <section className="bg-white px-5 py-20 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <SectionIntro eyebrow="Willkommen" title="Schön, dass Sie hier sind.">
+            <p>
+              Ich bin klinische Psychologin und biete psychologische Therapie
+              sowie diagnostische Abklärung für Erwachsene in Wien an. Mir ist
+              wichtig, dass psychologische Unterstützung verständlich,
+              transparent und individuell bleibt: ohne unnötige Distanz, aber
+              mit fachlicher Klarheit.
+            </p>
+          </SectionIntro>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border border-[#e1e5df] bg-[#f7faf7] p-6">
-              <p className="text-sm font-semibold uppercase text-[#5f7d72]">
-                Diagnostik
+          <div className="grid gap-8">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#63708f]">
+                Unterstützung bei
               </p>
-              <h3 className="mt-3 text-xl font-semibold">
-                Zeitnahe Abklärung
-              </h3>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Klinisch-psychologische Diagnostik für Erwachsene,
-                Privatpersonen und zuweisende Kolleg:innen.
-              </p>
-              <a
-                className="mt-5 inline-flex text-sm font-semibold text-[#d7192a] hover:text-[#a8111d]"
-                href="#diagnostik"
-              >
-                Mehr zur Diagnostik -&gt;
-              </a>
+              <div className="mt-5 grid gap-0 border-y border-[#c9d2d4]">
+                {supportTopics.map((topic) => (
+                  <div
+                    className="flex items-center justify-between gap-4 border-b border-[#dfe6e7] py-4 last:border-b-0"
+                    key={topic}
+                  >
+                    <span className="text-lg text-[#18272b]">{topic}</span>
+                    <span aria-hidden="true" className="text-[#d7192a]">
+                      +
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="rounded-lg border border-[#e1e5df] bg-[#f6f7fb] p-6">
-              <p className="text-sm font-semibold uppercase text-[#68789b]">
-                Setting
-              </p>
-              <h3 className="mt-3 text-xl font-semibold">
-                Vor Ort oder online
-              </h3>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Sitzungen finden in der Praxis im 1. Bezirk oder nach
-                Absprache online statt.
-              </p>
-              <a
-                className="mt-5 inline-flex text-sm font-semibold text-[#d7192a] hover:text-[#a8111d]"
-                href="#praxis"
-              >
-                Zur Praxis -&gt;
-              </a>
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="border-l-2 border-[#d7192a] pl-5">
+                <h3 className="font-serif text-2xl font-semibold">
+                  Diagnostik
+                </h3>
+                <p className="mt-3 leading-7 text-[#4a595d]">
+                  Zeitnahe klinisch-psychologische Diagnostik für Erwachsene,
+                  Privatpersonen und zuweisende Kolleg:innen.
+                </p>
+                <div className="mt-5">
+                  <TextLink href="#diagnostik">Mehr zur Diagnostik</TextLink>
+                </div>
+              </div>
+              <div className="border-l-2 border-[#8290b0] pl-5">
+                <h3 className="font-serif text-2xl font-semibold">Setting</h3>
+                <p className="mt-3 leading-7 text-[#4a595d]">
+                  Sitzungen finden in der Praxis im 1. Bezirk oder nach
+                  Absprache online statt.
+                </p>
+                <div className="mt-5">
+                  <TextLink href="#praxis">Zur Praxis</TextLink>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section
-        className="scroll-mt-28 bg-[#fbfbf8] px-5 py-20 sm:px-8 lg:px-10"
+        className="scroll-mt-28 bg-[#f2f7f8] px-5 py-24 sm:px-8 lg:px-10"
         id="ueber-mich"
       >
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-[#e6edf5]">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div className="relative aspect-[4/5] overflow-hidden bg-[#dfeaec]">
             <Image
               src="/images/maria.png"
               alt="Maria Chamarina"
               fill
-              sizes="(min-width: 1024px) 36vw, 100vw"
-              className="object-cover object-center"
+              sizes="(min-width: 1024px) 34vw, 100vw"
+              className="object-cover object-top"
             />
           </div>
+
           <div>
-            <SectionHeader
+            <SectionIntro
               eyebrow="Über mich"
               title="Offen, direkt und fachlich klar."
             >
@@ -387,55 +480,59 @@ export default function Home() {
                 nicht funktioniert, suchen wir gemeinsam nach einem anderen
                 Ansatz.
               </p>
-            </SectionHeader>
+            </SectionIntro>
 
-            <div className="mt-10 rounded-lg border border-[#e1e5df] bg-white p-6">
-              <h3 className="text-xl font-semibold">Ausbildung</h3>
-              <ul className="mt-5 grid gap-3 text-[#4b5659]">
-                {educationItems.map((item) => (
-                  <li className="flex gap-3 leading-7" key={item}>
-                    <span
-                      aria-hidden="true"
-                      className="mt-3 h-2 w-2 shrink-0 rounded-full bg-[#d7192a]"
-                    />
-                    <span>{item}</span>
-                  </li>
+            <div className="mt-12">
+              <h3 className="font-serif text-3xl font-semibold">Ausbildung</h3>
+              <div className="mt-6 border-y border-[#c9d2d4]">
+                {educationItems.map((item, index) => (
+                  <div
+                    className="grid gap-4 border-b border-[#d9e1e3] py-4 last:border-b-0 sm:grid-cols-[90px_1fr]"
+                    key={item}
+                  >
+                    <span className="font-mono text-sm text-[#8290b0]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="leading-7 text-[#4a595d]">{item}</p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section
-        className="scroll-mt-28 bg-[#172023] px-5 py-20 text-white sm:px-8 lg:px-10"
+        className="scroll-mt-28 bg-white px-5 py-24 sm:px-8 lg:px-10"
         id="schwerpunkte"
       >
         <div className="mx-auto max-w-7xl">
-          <SectionHeader
+          <SectionIntro
             eyebrow="Themen & Schwerpunkte"
-            title="Unterstützung bei psychischen Belastungen."
+            title="Psychische Belastungen verstehen und verändern."
           >
-            <p className="text-white/74">
+            <p>
               Gemeinsam schauen wir, worum es genau geht und wie wieder mehr
               Sicherheit, Stabilität oder Leichtigkeit im Alltag entstehen
               kann.
             </p>
-          </SectionHeader>
+          </SectionIntro>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {focusAreas.map((area) => (
-              <article
-                className="rounded-lg border border-white/12 bg-white/[0.06] p-6"
-                key={area.title}
-              >
-                <h3 className="text-xl font-semibold">{area.title}</h3>
-                <p className="mt-4 leading-7 text-white/76">{area.text}</p>
+          <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+            {focusAreas.map((area, index) => (
+              <article className="border-t border-[#c9d2d4] pt-6" key={area.title}>
+                <p className="font-mono text-sm text-[#8290b0]">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-4 font-serif text-3xl font-semibold">
+                  {area.title}
+                </h3>
+                <p className="mt-4 leading-7 text-[#4a595d]">{area.text}</p>
                 {area.items ? (
                   <ul className="mt-5 flex flex-wrap gap-2">
                     {area.items.map((item) => (
                       <li
-                        className="rounded-full border border-white/14 bg-white/[0.06] px-3 py-1.5 text-sm text-white/80"
+                        className="border border-[#d8ded6] px-3 py-1.5 text-sm text-[#4a595d]"
                         key={item}
                       >
                         {item}
@@ -450,12 +547,12 @@ export default function Home() {
       </section>
 
       <section
-        className="scroll-mt-28 bg-white px-5 py-20 sm:px-8 lg:px-10"
+        className="scroll-mt-28 bg-[#eaf2f3] px-5 py-24 sm:px-8 lg:px-10"
         id="diagnostik"
       >
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <SectionHeader
+            <SectionIntro
               eyebrow="Diagnostik"
               title="Klarheit durch klinisch-psychologische Abklärung."
             >
@@ -467,39 +564,39 @@ export default function Home() {
               <p className="mt-4">
                 Ich biete klinisch-psychologische Diagnostik für
                 Privatpersonen sowie für zuweisende Kolleg:innen an. Termine
-                sind meist zeitnah möglich. Die Diagnostik erfolgt privat,
-                eine direkte Abrechnung mit der Krankenkasse ist derzeit nicht
+                sind meist zeitnah möglich. Die Diagnostik erfolgt privat, eine
+                direkte Abrechnung mit der Krankenkasse ist derzeit nicht
                 möglich.
               </p>
-            </SectionHeader>
+            </SectionIntro>
 
-            <div className="mt-8 rounded-lg border border-[#e1e5df] bg-[#f7faf7] p-6">
-              <p className="text-sm font-semibold uppercase text-[#5f7d72]">
-                Kosten
+            <div className="mt-10 border-y border-[#b9c8cb] py-7">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#63708f]">
+                Kosten Diagnostik
               </p>
-              <p className="mt-2 text-3xl font-semibold">500 Euro</p>
-              <p className="mt-3 leading-7 text-[#4b5659]">
+              <p className="mt-2 font-serif text-5xl font-semibold">
+                500 Euro
+              </p>
+              <p className="mt-3 leading-7 text-[#4a595d]">
                 Klinisch-psychologische Diagnostik inklusive Befund oder
                 Gutachten.
               </p>
             </div>
           </div>
 
-          <div className="grid gap-4">
+          <div className="grid gap-0 border-y border-[#b9c8cb]">
             {diagnosticSteps.map((step, index) => (
               <div
-                className="rounded-lg border border-[#e1e5df] bg-[#fbfbf8] p-5"
+                className="grid gap-4 border-b border-[#cbd7da] py-5 last:border-b-0 sm:grid-cols-[80px_1fr]"
                 key={step}
               >
-                <div className="flex gap-4">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#172023] font-semibold text-white">
-                    {index + 1}
-                  </span>
-                  <p className="leading-7 text-[#4b5659]">{step}</p>
-                </div>
+                <span className="font-serif text-4xl font-semibold text-[#8290b0]">
+                  {index + 1}
+                </span>
+                <p className="leading-7 text-[#3f5054]">{step}</p>
               </div>
             ))}
-            <p className="rounded-lg border border-[#e1e5df] bg-white p-5 leading-7 text-[#4b5659]">
+            <p className="py-5 leading-7 text-[#3f5054]">
               In manchen Fällen kann für eine umfassende diagnostische
               Abklärung ein weiterer Termin sinnvoll oder notwendig sein.
             </p>
@@ -508,11 +605,11 @@ export default function Home() {
       </section>
 
       <section
-        className="scroll-mt-28 bg-[#f6f7fb] px-5 py-20 sm:px-8 lg:px-10"
+        className="scroll-mt-28 bg-white px-5 py-24 sm:px-8 lg:px-10"
         id="ablauf"
       >
         <div className="mx-auto max-w-7xl">
-          <SectionHeader
+          <SectionIntro
             eyebrow="Ablauf & Kosten"
             title="Transparent vom ersten Kontakt an."
           >
@@ -521,102 +618,117 @@ export default function Home() {
               andere brauchen mehr Zeit und Raum. Wichtig sind ein geschützter
               Rahmen, klare Ziele und ein Vorgehen, das zu Ihnen passt.
             </p>
-          </SectionHeader>
+          </SectionIntro>
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          <div className="mt-14 grid gap-0 border-y border-[#c9d2d4]">
             {processSteps.map((step, index) => (
               <article
-                className="rounded-lg border border-[#dfe3ea] bg-white p-6"
+                className="grid gap-5 border-b border-[#dce4e6] py-8 last:border-b-0 lg:grid-cols-[260px_1fr]"
                 key={step.title}
               >
-                <p className="text-sm font-semibold uppercase text-[#68789b]">
-                  Schritt {index + 1}
+                <div>
+                  <p className="font-mono text-sm text-[#8290b0]">
+                    Schritt {index + 1}
+                  </p>
+                  <h3 className="mt-3 font-serif text-3xl font-semibold">
+                    {step.title}
+                  </h3>
+                </div>
+                <p className="max-w-3xl leading-8 text-[#4a595d]">
+                  {step.text}
                 </p>
-                <h3 className="mt-3 text-xl font-semibold">{step.title}</h3>
-                <p className="mt-4 leading-7 text-[#4b5659]">{step.text}</p>
               </article>
             ))}
           </div>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            <div className="rounded-lg border border-[#dfe3ea] bg-white p-6">
-              <p className="text-sm font-semibold uppercase text-[#68789b]">
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
+            <div className="border-t border-[#8290b0] pt-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#63708f]">
                 Einheit
               </p>
-              <p className="mt-3 text-3xl font-semibold">50 Minuten</p>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Sitzungen können vor Ort oder online stattfinden.
+              <p className="mt-3 font-serif text-4xl font-semibold">
+                50 Minuten
+              </p>
+              <p className="mt-4 leading-7 text-[#4a595d]">
+                Sitzungen können vor Ort oder online stattfinden. Ob ein
+                Online-Setting sinnvoll ist, klärt sich meist nach dem
+                Erstgespräch.
               </p>
             </div>
-            <div className="rounded-lg border border-[#dfe3ea] bg-white p-6">
-              <p className="text-sm font-semibold uppercase text-[#68789b]">
+            <div className="border-t border-[#8290b0] pt-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#63708f]">
                 Kosten
               </p>
-              <p className="mt-3 text-3xl font-semibold">120 Euro</p>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Die Bezahlung erfolgt per Überweisung nach jeder Sitzung.
+              <p className="mt-3 font-serif text-4xl font-semibold">
+                120 Euro
+              </p>
+              <p className="mt-4 leading-7 text-[#4a595d]">
+                Die Bezahlung erfolgt per Überweisung nach jeder Sitzung. Die
+                Rechnung erhalten Sie im Anschluss per E-Mail.
               </p>
             </div>
-            <div className="rounded-lg border border-[#dfe3ea] bg-white p-6">
-              <p className="text-sm font-semibold uppercase text-[#68789b]">
+            <div className="border-t border-[#8290b0] pt-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#63708f]">
                 Krankenkasse
               </p>
-              <p className="mt-3 text-xl font-semibold">
-                Zuschuss grundsätzlich möglich
+              <p className="mt-3 font-serif text-3xl font-semibold">
+                Zuschuss möglich
               </p>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Weitere Informationen besprechen wir gerne im persönlichen
-                Gespräch.
+              <p className="mt-4 leading-7 text-[#4a595d]">
+                Ein Kostenzuschuss durch die Krankenkasse ist grundsätzlich
+                möglich. Weitere Informationen besprechen wir gerne persönlich.
               </p>
             </div>
           </div>
 
-          <p className="mt-8 rounded-lg border border-[#dfe3ea] bg-white p-6 leading-7 text-[#4b5659]">
+          <p className="mt-12 border-l-2 border-[#d7192a] pl-6 leading-8 text-[#4a595d]">
             Vertrauen und ein geschützter Rahmen sind wichtige Grundlagen der
             gemeinsamen Arbeit. Gespräche unterliegen selbstverständlich der
-            psychologischen Verschwiegenheitspflicht.
+            psychologischen Verschwiegenheitspflicht. Doppeleinheiten sind
+            prinzipiell möglich, aber nicht immer empfehlenswert.
           </p>
         </div>
       </section>
 
       <section
-        className="scroll-mt-28 bg-white px-5 py-20 sm:px-8 lg:px-10"
+        className="scroll-mt-28 bg-[#f2f7f8] px-5 py-24 sm:px-8 lg:px-10"
         id="praxis"
       >
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+          <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
             <div>
-              <SectionHeader
+              <SectionIntro
                 eyebrow="Praxis & Anfahrt"
-                title="Zentral im 1. Bezirk in Wien."
+                title="Ein ruhiger Ort im 1. Bezirk."
               >
                 <p>
-                  Die Praxis befindet sich in der Fischerstiege 10 und ist mit
-                  öffentlichen Verkehrsmitteln gut erreichbar.
+                  Die Praxis befindet sich in der Fischerstiege 10 in 1010
+                  Wien und ist mit öffentlichen Verkehrsmitteln gut erreichbar.
                 </p>
-              </SectionHeader>
+              </SectionIntro>
 
-              <div className="mt-8 grid gap-4">
-                <div className="rounded-lg border border-[#e1e5df] bg-[#fbfbf8] p-6">
-                  <h3 className="text-xl font-semibold">Adresse</h3>
-                  <p className="mt-3 leading-7 text-[#4b5659]">
+              <div className="mt-10 grid gap-8">
+                <div className="border-t border-[#b9c8cb] pt-5">
+                  <h3 className="font-serif text-3xl font-semibold">
+                    Adresse
+                  </h3>
+                  <p className="mt-3 leading-7 text-[#4a595d]">
                     Fischerstiege 10
                     <br />
                     1010 Wien
                   </p>
-                  <a
-                    className="mt-5 inline-flex text-sm font-semibold text-[#d7192a] hover:text-[#a8111d]"
-                    href="https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%201010%20Wien"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    Route öffnen -&gt;
-                  </a>
+                  <div className="mt-5">
+                    <TextLink href="https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%201010%20Wien">
+                      Route öffnen
+                    </TextLink>
+                  </div>
                 </div>
 
-                <div className="rounded-lg border border-[#e1e5df] bg-[#fbfbf8] p-6">
-                  <h3 className="text-xl font-semibold">Anfahrt</h3>
-                  <ul className="mt-4 grid gap-3 leading-7 text-[#4b5659]">
+                <div className="border-t border-[#b9c8cb] pt-5">
+                  <h3 className="font-serif text-3xl font-semibold">
+                    Anfahrt
+                  </h3>
+                  <ul className="mt-4 grid gap-2 leading-7 text-[#4a595d]">
                     <li>U1 / U3 Stephansplatz</li>
                     <li>U4 Schwedenplatz</li>
                     <li>Straßenbahn und Bus in Gehweite</li>
@@ -629,8 +741,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid gap-4">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+            <div className="grid gap-5">
+              <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src="/images/praxis1.png"
                   alt="Praxisraum mit Sesseln, Pflanzen und Flipchart"
@@ -639,100 +751,115 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-              <div className="relative aspect-[16/9] overflow-hidden rounded-lg">
-                <Image
-                  src="/images/praxis3.png"
-                  alt="Wartebereich mit zwei Sesseln und Bildern"
-                  fill
-                  sizes="(min-width: 1024px) 54vw, 100vw"
-                  className="object-cover"
-                />
+              <div className="grid gap-5 sm:grid-cols-[0.88fr_1.12fr]">
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image
+                    src="/images/praxis3.png"
+                    alt="Wartebereich mit zwei Sesseln und Bildern"
+                    fill
+                    sizes="(min-width: 1024px) 22vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image
+                    src="/images/praxis2-gallery.png"
+                    alt="Sitzbereich der Praxis mit hellen Fenstern"
+                    fill
+                    sizes="(min-width: 1024px) 28vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
-            <div className="rounded-lg border border-[#e1e5df] bg-[#fbfbf8] p-6">
-              <h3 className="text-xl font-semibold">Zum Termin</h3>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Bitte kommen Sie nicht deutlich vor dem vereinbarten Termin, da
-                ich in der Regel noch in einer laufenden Einheit bin.
-              </p>
-            </div>
-            <div className="rounded-lg border border-[#e1e5df] bg-[#fbfbf8] p-6">
-              <h3 className="text-xl font-semibold">Barrierefreiheit</h3>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Die Praxis ist leider nicht barrierefrei.
-              </p>
-            </div>
-            <div className="rounded-lg border border-[#e1e5df] bg-[#fbfbf8] p-6">
-              <h3 className="text-xl font-semibold">Absage</h3>
-              <p className="mt-3 leading-7 text-[#4b5659]">
-                Vereinbarte Termine sind verbindlich. Bitte sagen Sie
-                mindestens 24 Stunden im Voraus ab.
-              </p>
-            </div>
+          <div className="mt-14 grid gap-8 lg:grid-cols-3">
+            {practiceNotes.map((note) => (
+              <div className="border-t border-[#b9c8cb] pt-5" key={note.title}>
+                <h3 className="font-serif text-2xl font-semibold">
+                  {note.title}
+                </h3>
+                <p className="mt-3 leading-7 text-[#4a595d]">{note.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section
-        className="scroll-mt-28 bg-[#172023] px-5 py-20 text-white sm:px-8 lg:px-10"
+        className="scroll-mt-28 bg-[#18272b] px-5 py-24 text-white sm:px-8 lg:px-10"
         id="kontakt"
       >
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
-            <SectionHeader
-              eyebrow="Kontakt"
-              title="Kostenloses Erstgespräch vereinbaren."
-            >
-              <p className="text-white/74">
-                Wenn Sie das Gefühl haben, dass ein Gespräch hilfreich sein
-                könnte, können Sie gerne Kontakt aufnehmen. Sollten Sie mich
-                telefonisch nicht erreichen, melde ich mich umgehend zurück.
-              </p>
-            </SectionHeader>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f0b7bd]">
+              Kontakt
+            </p>
+            <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl">
+              Ich freue mich auf Ihre Nachricht.
+            </h2>
+            <div className="mt-5 h-px w-36 bg-[#8290b0]" />
+            <p className="mt-6 leading-8 text-white/76">
+              Wenn Sie das Gefühl haben, dass ein Gespräch hilfreich sein
+              könnte, können Sie gerne ein kostenloses Erstgespräch vereinbaren.
+              Sollten Sie mich telefonisch nicht erreichen, melde ich mich
+              umgehend zurück.
+            </p>
 
-            <div className="mt-8 grid gap-3">
+            <div className="mt-9 flex flex-col gap-4">
               <a
-                className="rounded-lg border border-white/12 bg-white/[0.06] p-5 transition hover:bg-white/[0.1]"
+                className="border-y border-white/18 py-5 transition hover:text-[#f0b7bd]"
                 href="mailto:kontakt@chamarina.at?subject=Termin%20buchen"
               >
-                <p className="text-sm uppercase text-white/56">E-Mail</p>
-                <p className="mt-1 text-xl font-semibold">
+                <span className="block text-sm uppercase tracking-[0.22em] text-white/48">
+                  E-Mail
+                </span>
+                <span className="mt-1 block text-2xl font-semibold">
                   kontakt@chamarina.at
-                </p>
+                </span>
               </a>
               <a
-                className="rounded-lg border border-white/12 bg-white/[0.06] p-5 transition hover:bg-white/[0.1]"
+                className="border-b border-white/18 py-5 transition hover:text-[#f0b7bd]"
                 href="https://wa.me/4366567243426"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <p className="text-sm uppercase text-white/56">WhatsApp</p>
-                <p className="mt-1 text-xl font-semibold">+43 665 67243426</p>
+                <span className="block text-sm uppercase tracking-[0.22em] text-white/48">
+                  WhatsApp
+                </span>
+                <span className="mt-1 block text-2xl font-semibold">
+                  +43 665 67243426
+                </span>
               </a>
               <a
-                className="rounded-lg border border-white/12 bg-white/[0.06] p-5 transition hover:bg-white/[0.1]"
+                className="border-b border-white/18 py-5 transition hover:text-[#f0b7bd]"
                 href="tel:+4366567243426"
               >
-                <p className="text-sm uppercase text-white/56">Telefon</p>
-                <p className="mt-1 text-xl font-semibold">+43 665 67243426</p>
+                <span className="block text-sm uppercase tracking-[0.22em] text-white/48">
+                  Telefon
+                </span>
+                <span className="mt-1 block text-2xl font-semibold">
+                  +43 665 67243426
+                </span>
               </a>
             </div>
           </div>
 
           <div>
-            <h2 className="text-3xl font-semibold leading-tight">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f0b7bd]">
+              FAQ
+            </p>
+            <h2 className="mt-4 font-serif text-4xl font-semibold">
               Häufige Fragen
             </h2>
-            <div className="mt-6 grid gap-3">
+            <div className="mt-8 border-y border-white/18">
               {faqItems.map((item) => (
                 <details
-                  className="group rounded-lg border border-white/12 bg-white/[0.06] p-5"
+                  className="group border-b border-white/14 py-5 last:border-b-0"
                   key={item.question}
                 >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-semibold">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-5 font-semibold">
                     <span>{item.question}</span>
                     <span
                       aria-hidden="true"
@@ -741,7 +868,7 @@ export default function Home() {
                       +
                     </span>
                   </summary>
-                  <p className="mt-4 leading-7 text-white/74">{item.answer}</p>
+                  <p className="mt-4 leading-7 text-white/70">{item.answer}</p>
                 </details>
               ))}
             </div>
@@ -749,9 +876,18 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#101719] px-5 py-8 text-white sm:px-8 lg:px-10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-white/62 sm:flex-row sm:items-center sm:justify-between">
-          <p>Praxis Chamarina - Klinische Psychologie in Wien</p>
+      <footer className="bg-[#101719] px-5 py-9 text-white sm:px-8 lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-white/62 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/images/logo.png"
+              alt=""
+              width={36}
+              height={36}
+              className="h-9 w-9"
+            />
+            <p>Praxis Chamarina - Klinische Psychologie in Wien</p>
+          </div>
           <p>Fischerstiege 10, 1010 Wien</p>
         </div>
       </footer>
