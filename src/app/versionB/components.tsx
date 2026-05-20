@@ -26,7 +26,7 @@ export function Header() {
 
         <nav
           aria-label="Version B Navigation"
-          className="hidden items-center gap-7 text-sm font-medium text-[#273b40] lg:flex"
+          className="hidden items-center gap-4 text-[0.82rem] font-medium text-[#273b40] lg:flex xl:gap-6 xl:text-sm"
         >
           {navItems.map((item) => (
             <Link

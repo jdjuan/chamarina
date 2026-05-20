@@ -1,15 +1,12 @@
 import Image from "next/image";
 import { CTA, PageHero } from "../components";
-import { educationItems } from "../content";
+import { aboutContent, educationItems } from "../content";
 
 export default function UeberMichPage() {
   return (
     <main>
-      <PageHero eyebrow="Über mich" title="Offen, direkt und fachlich klar.">
-        <p>
-          Ich arbeite evidenzbasiert und achte zugleich darauf, dass die
-          Zusammenarbeit zu Ihnen und Ihrer Situation passt.
-        </p>
+      <PageHero eyebrow={aboutContent.title} title={aboutContent.workTitle}>
+        <p>{aboutContent.workParagraphs[0]}</p>
       </PageHero>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
@@ -27,30 +24,11 @@ export default function UeberMichPage() {
           </div>
 
           <div className="text-lg leading-9 text-[#506a70]">
-            <p>
-              Als klinische Psychologin arbeite ich evidenzbasiert - das heißt,
-              ich orientiere mich an Methoden, die sich wissenschaftlich
-              bewährt haben und vielen Menschen in ähnlichen Situationen
-              helfen. Gleichzeitig ist mir wichtig, dass wir gemeinsam schauen,
-              was für Sie persönlich passt.
-            </p>
-            <p className="mt-5">
-              Ich bin eher ein offener und direkter Mensch. Humor darf dabei
-              genauso Platz haben wie ernstere Themen - und wenn es passt, auch
-              mal ein klar ausgesprochenes Wort.
-            </p>
-            <p className="mt-5">
-              Was mich besonders interessiert, sind individuelle Lösungen. Auch
-              wenn sich Probleme ähneln, ist der Weg zum Ziel oft
-              unterschiedlich. Manchmal hilft es, Dinge gemeinsam
-              aufzuschreiben, sie werden dadurch greifbarer und oft auch
-              leichter veränderbar.
-            </p>
-            <p className="mt-5">
-              Und wenn etwas nicht funktioniert, suchen wir gemeinsam nach
-              einem anderen Ansatz. Schritt für Schritt herausfinden, was hilft
-              - und was nicht.
-            </p>
+            {aboutContent.workParagraphs.slice(1).map((paragraph) => (
+              <p className="mt-5 first:mt-0" key={paragraph}>
+                {paragraph}
+              </p>
+            ))}
             <div className="mt-8">
               <CTA href="/versionB/kontakt">Kontakt aufnehmen</CTA>
             </div>
@@ -61,10 +39,10 @@ export default function UeberMichPage() {
       <section className="bg-[#e9f8f5] px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d7192a]">
-            Ausbildung
+            {aboutContent.educationTitle}
           </p>
           <h2 className="mt-4 text-4xl font-semibold text-[#14363b]">
-            Stationen und Erfahrung
+            {aboutContent.educationTitle}
           </h2>
           <div className="mt-10 grid gap-4">
             {educationItems.map((item, index) => (

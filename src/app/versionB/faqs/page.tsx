@@ -1,15 +1,10 @@
 import { PageHero } from "../components";
-import { faqItems } from "../content";
+import { faqIntro, faqItems } from "../content";
 
 export default function FAQsPage() {
   return (
     <main>
-      <PageHero eyebrow="FAQs" title="Häufige Fragen">
-        <p>
-          Antworten auf wiederkehrende Fragen zu Erstgespräch, Online-Terminen,
-          Kosten, Diagnostik und Terminabsagen.
-        </p>
-      </PageHero>
+      <PageHero eyebrow="FAQ" title={faqIntro} />
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-4xl rounded-[2.5rem] bg-[#f3fbf8] p-5 sm:p-8">

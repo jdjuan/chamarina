@@ -1,7 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CTA, SectionTitle, SoftCard } from "./components";
-import { contact, supportTopics } from "./content";
+import { contact, homeContent, supportTopics } from "./content";
+
+const topicPills = [
+  {
+    card: "border-[#f3bbb2] bg-[#fff8f5] hover:border-[#d7192a] hover:bg-white",
+    dot: "bg-[#d7192a] shadow-[0_0_0_6px_rgba(215,25,42,0.1)]",
+  },
+  {
+    card: "border-[#bfe7dc] bg-[#f6fffb] hover:border-[#4eaa96] hover:bg-white",
+    dot: "bg-[#4eaa96] shadow-[0_0_0_6px_rgba(78,170,150,0.12)]",
+  },
+  {
+    card: "border-[#ffd1ad] bg-[#fffaf1] hover:border-[#eaa455] hover:bg-white",
+    dot: "bg-[#eaa455] shadow-[0_0_0_6px_rgba(234,164,85,0.14)]",
+  },
+  {
+    card: "border-[#bddaf6] bg-[#f4f9ff] hover:border-[#669ed3] hover:bg-white",
+    dot: "bg-[#669ed3] shadow-[0_0_0_6px_rgba(102,158,211,0.13)]",
+  },
+  {
+    card: "border-[#efc0da] bg-[#fff6fb] hover:border-[#c76598] hover:bg-white",
+    dot: "bg-[#c76598] shadow-[0_0_0_6px_rgba(199,101,152,0.12)]",
+  },
+];
 
 export default function VersionBHome() {
   return (
@@ -22,18 +45,16 @@ export default function VersionBHome() {
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d7192a]">
               Praxis Chamarina Psychologie
             </p>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] text-[#12343a] sm:text-5xl lg:text-6xl">
-              Psychologie in Wien.
+            <h1 className="mt-6 text-3xl font-semibold leading-[1.08] text-[#12343a] sm:text-5xl lg:text-6xl">
+              {homeContent.title}
             </h1>
             <p className="mt-6 max-w-xl text-xl leading-9 text-[#314f56]">
-              Klinisch-psychologische Behandlung, Diagnostik und Beratung für
-              Erwachsene. Unterstützung bei Angst, Zwang, Depression,
-              Beziehungsthemen, Sexualität und anderen psychischen Belastungen.
+              {homeContent.subtitle}
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <CTA href="/versionB/angebote">Meine Angebote</CTA>
-              <CTA href="/versionB/kontakt" variant="secondary">
-                Erstgespräch vereinbaren
+              <CTA href="/versionB/kontakt">{homeContent.button}</CTA>
+              <CTA href="/versionB/diagnostik" variant="secondary">
+                Mehr zur Diagnostik
               </CTA>
             </div>
           </div>
@@ -54,7 +75,7 @@ export default function VersionBHome() {
             </div>
             <div className="relative -mt-8 ml-auto max-w-[230px] rounded-3xl bg-white p-5 shadow-[0_18px_44px_rgba(20,54,59,0.13)]">
               <p className="text-sm font-semibold leading-6 text-[#14363b]">
-                Vor Ort im 1. Bezirk oder online nach Absprache.
+                Wien, 1. Bezirk · online oder vor Ort
               </p>
             </div>
           </div>
@@ -65,49 +86,52 @@ export default function VersionBHome() {
         <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <SectionTitle
             eyebrow="Kurz vorgestellt"
-            title="Mein Name ist Maria Chamarina."
+            title={homeContent.welcomeTitle}
           >
-            <p>
-              Ich bin klinische Psychologin und biete psychologische Behandlung
-              sowie diagnostische Abklärung für Erwachsene in meiner Praxis in
-              Wien an.
-            </p>
-            <p className="mt-4">
-              Psychologische Unterstützung soll verständlich, transparent und
-              individuell bleiben: ohne unnötige Distanz, aber mit fachlicher
-              Klarheit.
-            </p>
+            <p>{homeContent.intro}</p>
+            <p className="mt-4">{homeContent.supportIntro}</p>
+            <ul className="mt-4 grid gap-2">
+              {homeContent.supportTopics.map((topic) => (
+                <li className="flex gap-3" key={topic}>
+                  <span aria-hidden="true" className="text-[#d7192a]">
+                    •
+                  </span>
+                  <span>{topic}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4">{homeContent.principle}</p>
           </SectionTitle>
 
           <div className="grid gap-5 sm:grid-cols-2">
             <Link
               className="rounded-[2rem] bg-[#ecfbf6] p-7 shadow-[0_18px_48px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
-              href="/versionB/angebote"
+              href="/versionB/diagnostik"
             >
               <h3 className="text-2xl font-semibold text-[#14363b]">
-                Behandlung
+                {homeContent.diagnosticsTitle}
               </h3>
               <p className="mt-4 leading-7 text-[#506a70]">
-                Für Themen wie Angst, Zwang, Depression, Beziehung, Selbstwert
-                und Sexualität.
+                {homeContent.diagnosticsText}
               </p>
               <p className="mt-6 text-sm font-semibold text-[#d7192a]">
-                Mehr erfahren -&gt;
+                Mehr zur Diagnostik -&gt;
               </p>
             </Link>
             <Link
               className="rounded-[2rem] bg-[#eef6ff] p-7 shadow-[0_18px_48px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
-              href="/versionB/diagnostik"
+              href="/versionB/praxis"
             >
               <h3 className="text-2xl font-semibold text-[#14363b]">
-                Diagnostik
+                {homeContent.settingTitle}
               </h3>
-              <p className="mt-4 leading-7 text-[#506a70]">
-                Zeitnahe klinisch-psychologische Abklärung inklusive Befund
-                oder Gutachten.
-              </p>
+              <ul className="mt-4 grid gap-2 leading-7 text-[#506a70]">
+                {homeContent.settingItems.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
               <p className="mt-6 text-sm font-semibold text-[#d7192a]">
-                Mehr erfahren -&gt;
+                Zur Praxis -&gt;
               </p>
             </Link>
           </div>
@@ -118,22 +142,29 @@ export default function VersionBHome() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <SectionTitle
-              eyebrow="Themen"
-              title="Psychische Gesundheit zeigt sich in vielen Lebensbereichen."
+              eyebrow="Themen und Schwerpunkte"
+              title={homeContent.supportIntro}
             >
-              <p>
-                In meiner psychologischen Praxis geht es um die Wechselwirkung
-                zwischen Belastung, Körper, Beziehung und Alltag.
-              </p>
+              <p>{homeContent.closing}</p>
             </SectionTitle>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {supportTopics.map((topic) => (
+            <div className="mt-8 grid max-w-4xl gap-4 sm:grid-cols-2">
+              {supportTopics.map((topic, index) => (
                 <Link
-                  className="rounded-full border border-[#f1c3ba] bg-white px-4 py-2 text-sm font-medium text-[#314f56] transition hover:border-[#d7192a] hover:text-[#d7192a]"
+                  className={`group flex min-h-16 items-center gap-4 rounded-2xl border px-5 py-4 text-base font-semibold leading-snug text-[#29464d] shadow-[0_16px_34px_rgba(20,54,59,0.08)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_46px_rgba(20,54,59,0.13)] ${topicPills[index % topicPills.length].card}`}
                   href="/versionB/themen"
                   key={topic}
                 >
-                  {topic}
+                  <span
+                    aria-hidden="true"
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${topicPills[index % topicPills.length].dot}`}
+                  />
+                  <span>{topic}</span>
+                  <span
+                    aria-hidden="true"
+                    className="ml-auto shrink-0 text-[#d7192a] opacity-45 transition group-hover:translate-x-1 group-hover:opacity-100"
+                  >
+                    →
+                  </span>
                 </Link>
               ))}
             </div>
@@ -155,7 +186,7 @@ export default function VersionBHome() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Überblick"
-            title="Mehr Information auf kurzen Detailseiten."
+            title="Mehr Informationen auf kurzen Detailseiten."
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             <SoftCard title="Ablauf & Kosten" href="/versionB/ablauf-kosten">
@@ -209,9 +240,9 @@ export default function VersionBHome() {
               className="rounded-3xl bg-[#d7192a] p-6 font-semibold text-white shadow-[0_16px_42px_rgba(215,25,42,0.2)] transition hover:-translate-y-1"
               href="/versionB/kontakt"
             >
-              Zum Kontakt
+              {homeContent.button}
               <span className="mt-2 block text-sm text-white/72">
-                Alle Optionen ansehen
+                Kostenloses Erstgespräch vereinbaren
               </span>
             </Link>
           </div>

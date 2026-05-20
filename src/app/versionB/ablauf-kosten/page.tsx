@@ -1,28 +1,43 @@
 import { CTA, PageHero, SoftCard } from "../components";
-import { processSteps } from "../content";
+import { practiceContent, processContent } from "../content";
 
 export default function AblaufKostenPage() {
   return (
     <main>
       <PageHero
-        eyebrow="Ablauf & Kosten"
-        title="Transparent vom ersten Kontakt an."
+        eyebrow={processContent.title}
+        title={processContent.title}
       >
-        <p>
-          Manche Themen lassen sich eher strukturiert und fokussiert
-          bearbeiten, andere brauchen mehr Zeit und Raum.
-        </p>
+        <p>{processContent.steps[0].paragraphs[0]}</p>
       </PageHero>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-5 lg:grid-cols-3">
-            {processSteps.map((step, index) => (
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d7192a]">
+            {processContent.processTitle}
+          </p>
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {processContent.steps.map((step, index) => (
               <SoftCard title={step.title} key={step.title}>
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#d7192a]">
                   Schritt {index + 1}
                 </p>
-                {step.text}
+                <div className="grid gap-3">
+                  {step.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  <ul className="grid gap-2">
+                    {step.items.map((item) => (
+                      <li className="flex gap-3" key={item}>
+                        <span aria-hidden="true" className="text-[#d7192a]">
+                          •
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {step.closing ? <p>{step.closing}</p> : null}
+                </div>
               </SoftCard>
             ))}
           </div>
@@ -31,40 +46,43 @@ export default function AblaufKostenPage() {
 
       <section className="bg-[#e9f8f5] px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
-          <SoftCard title="Einheit">
-            <p className="text-4xl font-semibold text-[#14363b]">50 Minuten</p>
-            <p className="mt-4">
-              Sitzungen können sowohl vor Ort in der Praxis als auch online
-              stattfinden. Doppeleinheiten sind prinzipiell möglich, aber nicht
-              immer empfehlenswert.
-            </p>
+          <SoftCard title={processContent.costTitle}>
+            <ul className="grid gap-2">
+              {processContent.costs.map((item) => (
+                <li className="text-2xl font-semibold text-[#14363b]" key={item}>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </SoftCard>
-          <SoftCard title="Kosten">
-            <p className="text-4xl font-semibold text-[#14363b]">120 Euro</p>
-            <p className="mt-4">
-              Die Bezahlung erfolgt per Überweisung nach jeder Sitzung. Die
-              Rechnung erhalten Sie im Anschluss per E-Mail.
-            </p>
+          <SoftCard title="Setting">
+            <div className="grid gap-3">
+              {processContent.costsParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </SoftCard>
-          <SoftCard title="Krankenkasse">
-            Ein Kostenzuschuss durch die Krankenkasse ist grundsätzlich
-            möglich. Genauere Informationen besprechen wir gerne persönlich.
+          <SoftCard title={processContent.insuranceTitle}>
+            <div className="grid gap-3">
+              {processContent.insuranceParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </SoftCard>
         </div>
       </section>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
-          <SoftCard title="Verschwiegenheit">
-            Vertrauen und ein geschützter Rahmen sind wichtige Grundlagen der
-            gemeinsamen Arbeit. Gespräche unterliegen selbstverständlich der
-            psychologischen Verschwiegenheitspflicht.
+          <SoftCard title={processContent.confidentialityTitle}>
+            {processContent.confidentiality}
           </SoftCard>
-          <SoftCard title="Terminabsage">
-            Vereinbarte Termine sind verbindlich. Wenn Sie einen Termin nicht
-            wahrnehmen können, bitte ich um eine Absage mindestens 24 Stunden
-            im Voraus. Kurzfristig abgesagte oder nicht wahrgenommene Termine
-            werden in Rechnung gestellt.
+          <SoftCard title={practiceContent.appointmentTitle}>
+            <div className="grid gap-3">
+              {practiceContent.appointmentParagraphs.slice(2).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </SoftCard>
         </div>
         <div className="mx-auto mt-10 max-w-7xl">

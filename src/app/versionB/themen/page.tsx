@@ -5,13 +5,10 @@ export default function ThemenPage() {
   return (
     <main>
       <PageHero
-        eyebrow="Themen"
-        title="Schwerpunkte der psychologischen Behandlung."
+        eyebrow="Themen & Schwerpunkte"
+        title="Themen und Schwerpunkte"
       >
-        <p>
-          Auch wenn sich Probleme ähneln, ist der Weg zum Ziel oft
-          unterschiedlich. Gemeinsam schauen wir, was für Sie persönlich passt.
-        </p>
+        <p>Angst, Zwang, Depression, Selbstwert, Beziehung und Sexualität.</p>
       </PageHero>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
@@ -30,18 +27,31 @@ export default function ThemenPage() {
                 </h2>
               </div>
               <div>
-                <p className="leading-8 text-[#506a70]">{area.text}</p>
+                <div className="grid gap-4 leading-8 text-[#506a70]">
+                  {area.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
                 {area.items ? (
                   <div className="mt-5 flex flex-wrap gap-2">
                     {area.items.map((item) => (
                       <span
-                        className="rounded-full border border-[#f1c3ba] bg-[#fff7ee] px-3 py-1.5 text-sm text-[#314f56]"
+                        className="inline-flex items-center gap-2 rounded-2xl border border-[#f1c3ba] bg-white px-3.5 py-2 text-sm font-medium text-[#314f56] shadow-[0_10px_24px_rgba(20,54,59,0.06)]"
                         key={item}
                       >
+                        <span
+                          aria-hidden="true"
+                          className="h-1.5 w-1.5 rounded-full bg-[#d7192a]"
+                        />
                         {item}
                       </span>
                     ))}
                   </div>
+                ) : null}
+                {area.closing ? (
+                  <p className="mt-5 leading-8 text-[#506a70]">
+                    {area.closing}
+                  </p>
                 ) : null}
               </div>
             </article>

@@ -1,34 +1,32 @@
 import { CTA, PageHero, SoftCard } from "../components";
-import { focusAreas } from "../content";
+import { diagnosticsContent, focusAreas, homeContent } from "../content";
 
 export default function AngebotePage() {
   return (
     <main>
-      <PageHero
-        eyebrow="Meine Angebote"
-        title="Klinisch-psychologische Behandlung, Beratung und Diagnostik."
-      >
-        <p>
-          Ich begleite Erwachsene bei psychischen Belastungen und biete
-          diagnostische Abklärung für Privatpersonen sowie für zuweisende
-          Kolleg:innen an.
-        </p>
+      <PageHero eyebrow="Startseite" title={homeContent.title}>
+        <p>{homeContent.subtitle}</p>
       </PageHero>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
           <SoftCard title="Behandlung">
-            Psychologische Unterstützung bei Angst, Zwang, Depression,
-            Selbstwert- und Beziehungsthemen, Sexualität und sexuellen
-            Funktionsstörungen.
+            <p>{homeContent.supportIntro}</p>
+            <ul className="mt-3 grid gap-2">
+              {homeContent.supportTopics.map((topic) => (
+                <li key={topic}>{topic}</li>
+              ))}
+            </ul>
           </SoftCard>
-          <SoftCard title="Diagnostik">
-            Klinisch-psychologische Diagnostik mit ausführlichem Gespräch,
-            Testverfahren, Rückmeldung und Befund oder Gutachten.
+          <SoftCard title={homeContent.diagnosticsTitle}>
+            {homeContent.diagnosticsText}
           </SoftCard>
-          <SoftCard title="Setting">
-            Sitzungen können vor Ort in der Praxis im 1. Bezirk oder nach
-            Absprache online stattfinden.
+          <SoftCard title={homeContent.settingTitle}>
+            <ul className="grid gap-2">
+              {homeContent.settingItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </SoftCard>
         </div>
       </section>
@@ -39,7 +37,7 @@ export default function AngebotePage() {
             Themen
           </p>
           <h2 className="mt-4 max-w-4xl text-4xl font-semibold leading-tight text-[#14363b] sm:text-5xl">
-            Häufige Anliegen in der psychologischen Behandlung.
+            Themen und Schwerpunkte
           </h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {focusAreas.map((area) => (
@@ -50,10 +48,15 @@ export default function AngebotePage() {
                 <h3 className="text-2xl font-semibold text-[#14363b]">
                   {area.title}
                 </h3>
-                <p className="mt-4 leading-7 text-[#506a70]">{area.text}</p>
+                <p className="mt-4 leading-7 text-[#506a70]">
+                  {area.paragraphs[0]}
+                </p>
               </article>
             ))}
           </div>
+          <p className="mt-10 max-w-3xl leading-8 text-[#506a70]">
+            {diagnosticsContent.paragraphs[0]}
+          </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <CTA href="/versionB/themen">Alle Themen ansehen</CTA>
             <CTA href="/versionB/kontakt" variant="secondary">
