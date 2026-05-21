@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { CTA, PageHero } from "../components";
 import { focusAreas } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Themen & Schwerpunkte",
+  description:
+    "Psychologische Behandlung bei Angst, Zwang, Depression, Selbstwert, Beziehungsthemen und Sexualität in Wien.",
+  path: "/themen",
+});
 
 export default function ThemenPage() {
   return (

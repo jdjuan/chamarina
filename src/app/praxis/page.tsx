@@ -1,6 +1,16 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { CTA, PageHero, SoftCard } from "../components";
 import { practiceContent } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Praxis & Anfahrt",
+  description:
+    "Adresse, Anfahrt und Termin-Hinweise zur Praxis Chamarina in der Fischerstiege 10 im 1. Bezirk in Wien.",
+  path: "/praxis",
+  image: "/images/praxis2.png",
+});
 
 export default function PraxisPage() {
   return (
@@ -18,6 +28,7 @@ export default function PraxisPage() {
               </p>
               <p className="mt-3">{practiceContent.addressText}</p>
               <a
+                aria-label="Route zur Praxis Chamarina in Google Maps öffnen"
                 className="mt-5 inline-flex font-semibold text-[#d7192a]"
                 href="https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%201010%20Wien"
                 rel="noopener noreferrer"

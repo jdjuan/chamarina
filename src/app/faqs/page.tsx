@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { PageHero } from "../components";
 import { faqIntro, faqItems } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Häufige Fragen",
+  description:
+    "Antworten auf häufige Fragen zu Erstgespräch, Online-Terminen, Kosten, Diagnostik, Verschwiegenheit und Terminabsage.",
+  path: "/faqs",
+});
 
 export default function FAQsPage() {
   return (

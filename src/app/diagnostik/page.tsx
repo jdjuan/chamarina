@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { CTA, PageHero } from "../components";
 import { diagnosticsContent } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Klinisch-psychologische Diagnostik",
+  description:
+    "Klinisch-psychologische Diagnostik für Erwachsene in Wien mit Gespräch, Testverfahren, Rückmeldung und Befund oder Gutachten.",
+  path: "/diagnostik",
+});
 
 export default function DiagnostikPage() {
   return (

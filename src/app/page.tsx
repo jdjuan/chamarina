@@ -1,7 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { CTA, SectionTitle, SoftCard } from "./components";
 import { contact, homeContent, supportTopics } from "./content";
+import { createPageMetadata, defaultDescription } from "./seo";
+
+const homeMetadata = createPageMetadata({
+  title: "Klinisch-psychologische Behandlung & Diagnostik in Wien",
+  description: defaultDescription,
+  path: "/",
+  image: "/images/maria.png",
+  imageAlt: "Maria Chamarina, klinische Psychologin in Wien",
+});
+
+export const metadata: Metadata = {
+  ...homeMetadata,
+  title: {
+    absolute:
+      "Klinisch-psychologische Behandlung & Diagnostik in Wien | Praxis Chamarina",
+  },
+};
 
 const topicPills = [
   {
@@ -35,7 +53,6 @@ export default function Home() {
           alt="Heller Praxisraum der Praxis Chamarina"
           fill
           priority
-          unoptimized
           sizes="100vw"
           className="object-cover object-center opacity-38"
         />
@@ -68,7 +85,6 @@ export default function Home() {
                 alt="Maria Chamarina"
                 fill
                 priority
-                unoptimized
                 sizes="430px"
                 className="object-cover object-top"
               />
@@ -219,6 +235,7 @@ export default function Home() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             <a
+              aria-label={`E-Mail an ${contact.email} schreiben`}
               className="rounded-3xl bg-white p-6 shadow-[0_16px_42px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
               href={`mailto:${contact.email}`}
             >
@@ -228,6 +245,7 @@ export default function Home() {
               <span className="mt-2 block font-semibold">{contact.email}</span>
             </a>
             <a
+              aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
               className="rounded-3xl bg-white p-6 shadow-[0_16px_42px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
               href={`tel:${contact.phone.replaceAll(" ", "")}`}
             >

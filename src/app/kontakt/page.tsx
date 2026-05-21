@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { PageHero, SoftCard } from "../components";
 import { contact, contactContent, practiceContent } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Kontakt",
+  description:
+    "Kontakt zur Praxis Chamarina in Wien: Termin anfragen per E-Mail, Telefon oder WhatsApp.",
+  path: "/kontakt",
+});
 
 export default function KontaktPage() {
   return (
@@ -10,7 +19,10 @@ export default function KontaktPage() {
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
-          <a href={`mailto:${contact.email}`}>
+          <a
+            aria-label={`E-Mail an ${contact.email} schreiben`}
+            href={`mailto:${contact.email}`}
+          >
             <SoftCard title="E-Mail">
               <p>{contactContent.mail}</p>
               <p className="mt-3 text-2xl font-semibold text-[#14363b]">
@@ -18,7 +30,12 @@ export default function KontaktPage() {
               </p>
             </SoftCard>
           </a>
-          <a href={contact.whatsapp} rel="noopener noreferrer" target="_blank">
+          <a
+            aria-label={`WhatsApp an Praxis Chamarina unter ${contact.phone} öffnen`}
+            href={contact.whatsapp}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <SoftCard title="WhatsApp">
               <p>{contactContent.whatsapp}</p>
               <p className="mt-3 text-2xl font-semibold text-[#14363b]">
@@ -26,7 +43,10 @@ export default function KontaktPage() {
               </p>
             </SoftCard>
           </a>
-          <a href={`tel:${contact.phone.replaceAll(" ", "")}`}>
+          <a
+            aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
+            href={`tel:${contact.phone.replaceAll(" ", "")}`}
+          >
             <SoftCard title="Telefon">
               <p>{contactContent.phoneIntro}</p>
               <p className="mt-3 text-2xl font-semibold text-[#14363b]">

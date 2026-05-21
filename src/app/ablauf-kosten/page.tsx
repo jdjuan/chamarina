@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { CTA, PageHero, SoftCard } from "../components";
 import { practiceContent, processContent } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Ablauf & Kosten",
+  description:
+    "Informationen zu kostenlosem Erstgespräch, Ablauf der psychologischen Behandlung, Kosten, Verschwiegenheit und Krankenkasse.",
+  path: "/ablauf-kosten",
+});
 
 export default function AblaufKostenPage() {
   return (

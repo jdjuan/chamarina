@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { PageHero } from "../components";
 import { contact } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Impressum",
+  description:
+    "Impressum und rechtliche Angaben zur Praxis Chamarina, klinische Psychologie in Wien.",
+  path: "/impressum",
+});
 
 export default function ImpressumPage() {
   return (
@@ -32,12 +41,17 @@ export default function ImpressumPage() {
               </h2>
               <p className="mt-4 leading-8 text-[#506a70]">
                 E-Mail:{" "}
-                <a className="text-[#d7192a]" href={`mailto:${contact.email}`}>
+                <a
+                  aria-label={`E-Mail an ${contact.email} schreiben`}
+                  className="text-[#d7192a]"
+                  href={`mailto:${contact.email}`}
+                >
                   {contact.email}
                 </a>
                 <br />
                 Telefon:{" "}
                 <a
+                  aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
                   className="text-[#d7192a]"
                   href={`tel:${contact.phone.replaceAll(" ", "")}`}
                 >

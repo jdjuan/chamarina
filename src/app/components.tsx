@@ -10,7 +10,7 @@ export function Header() {
         <Link className="flex items-center gap-3" href="/">
           <Image
             src="/images/logo.png"
-            alt="Praxis Chamarina Logo"
+            alt=""
             width={44}
             height={44}
             priority
@@ -113,11 +113,24 @@ export function Footer() {
             Kontakt
           </p>
           <div className="mt-4 grid gap-2 text-white/78">
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
-            <a href={`tel:${contact.phone.replaceAll(" ", "")}`}>
+            <a
+              aria-label={`E-Mail an ${contact.email} schreiben`}
+              href={`mailto:${contact.email}`}
+            >
+              {contact.email}
+            </a>
+            <a
+              aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
+              href={`tel:${contact.phone.replaceAll(" ", "")}`}
+            >
               {contact.phone}
             </a>
-            <a href={contact.whatsapp} rel="noopener noreferrer" target="_blank">
+            <a
+              aria-label={`WhatsApp an Praxis Chamarina unter ${contact.phone} öffnen`}
+              href={contact.whatsapp}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               WhatsApp
             </a>
           </div>

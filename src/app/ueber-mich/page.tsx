@@ -1,6 +1,17 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { CTA, PageHero } from "../components";
 import { aboutContent, educationItems } from "../content";
+import { createPageMetadata } from "../seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Über mich",
+  description:
+    "Über Maria Chamarina, klinische Psychologin in Wien, ihre evidenzbasierte Arbeitsweise, Ausbildung und Erfahrung.",
+  path: "/ueber-mich",
+  image: "/images/maria.png",
+  imageAlt: "Maria Chamarina, klinische Psychologin in Wien",
+});
 
 export default function UeberMichPage() {
   return (
@@ -17,7 +28,6 @@ export default function UeberMichPage() {
               alt="Maria Chamarina"
               fill
               priority
-              unoptimized
               sizes="(min-width: 1024px) 36vw, 100vw"
               className="object-cover object-top"
             />
