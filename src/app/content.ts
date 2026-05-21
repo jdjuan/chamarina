@@ -1,7 +1,7 @@
 export const siteUrl = "Chamarina-praxis.at";
 
 export const contact = {
-  email: "kontakt@chamarina.at",
+  email: "kontakt@psychologie-chamarina.at",
   phone: "+43 665 67243426",
   whatsapp: "https://wa.me/4366567243426",
   addressLine: "Fischerstiege 10",
@@ -268,7 +268,7 @@ export const practiceContent = {
 
 export const contactContent = {
   title: "Kontakt",
-  mail: "Per Mail kontakt@chamarina.at",
+  mail: "Per Mail kontakt@psychologie-chamarina.at",
   whatsapp: "WhatsApp +43 665 67243426",
   phoneIntro:
     "Telefonisch. Sollten Sie mich nicht erreichen, melde ich mich umgehend zurück.",
