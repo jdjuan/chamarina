@@ -89,7 +89,7 @@ export default function DiagnostikPage() {
             sowie für zuweisende Kolleg:innen an.
           </p>
           <div className="mt-7">
-            <CTA href="/versionB/kontakt">Kontakt aufnehmen</CTA>
+            <CTA href="/kontakt">Kontakt aufnehmen</CTA>
           </div>
         </div>
       </section>

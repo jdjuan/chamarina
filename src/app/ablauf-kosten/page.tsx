@@ -86,7 +86,7 @@ export default function AblaufKostenPage() {
           </SoftCard>
         </div>
         <div className="mx-auto mt-10 max-w-7xl">
-          <CTA href="/versionB/kontakt">Erstgespräch vereinbaren</CTA>
+          <CTA href="/kontakt">Erstgespräch vereinbaren</CTA>
         </div>
       </section>
     </main>

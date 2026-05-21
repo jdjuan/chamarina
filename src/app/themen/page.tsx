@@ -64,7 +64,7 @@ export default function ThemenPage() {
           <h2 className="max-w-2xl text-3xl font-semibold text-[#14363b]">
             Sie sind unsicher, ob Ihr Anliegen passt?
           </h2>
-          <CTA href="/versionB/kontakt">Kontakt aufnehmen</CTA>
+          <CTA href="/kontakt">Kontakt aufnehmen</CTA>
         </div>
       </section>
     </main>

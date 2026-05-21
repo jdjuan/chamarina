@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#dcece8] bg-white/94 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-8 lg:px-10">
-        <Link className="flex items-center gap-3" href="/versionB">
+        <Link className="flex items-center gap-3" href="/">
           <Image
             src="/images/logo.png"
             alt="Praxis Chamarina Logo"
@@ -25,7 +25,7 @@ export function Header() {
         </Link>
 
         <nav
-          aria-label="Version B Navigation"
+          aria-label="Hauptnavigation"
           className="hidden items-center gap-4 text-[0.82rem] font-medium text-[#273b40] lg:flex xl:gap-6 xl:text-sm"
         >
           {navItems.map((item) => (
@@ -39,7 +39,7 @@ export function Header() {
           ))}
           <Link
             className="rounded-full bg-[#d7192a] px-5 py-2.5 font-semibold text-white shadow-[0_12px_26px_rgba(215,25,42,0.18)] transition hover:bg-[#b91424]"
-            href="/versionB/kontakt"
+            href="/kontakt"
           >
             Kontakt
           </Link>
@@ -59,7 +59,7 @@ export function Header() {
           </summary>
           <div className="absolute right-0 top-14 w-[min(84vw,320px)] rounded-3xl border border-[#dcece8] bg-white p-5 shadow-[0_22px_55px_rgba(24,39,43,0.16)]">
             <nav
-              aria-label="Mobile Version B Navigation"
+              aria-label="Mobile Hauptnavigation"
               className="grid gap-3 text-base font-medium text-[#273b40]"
             >
               {navItems.map((item) => (
@@ -73,7 +73,7 @@ export function Header() {
               ))}
               <Link
                 className="mt-2 rounded-full bg-[#d7192a] px-5 py-3 text-center text-sm font-semibold text-white"
-                href="/versionB/kontakt"
+                href="/kontakt"
               >
                 Kontakt aufnehmen
               </Link>
@@ -90,7 +90,7 @@ export function Footer() {
     <footer className="bg-[#14363b] px-5 py-12 text-white sm:px-8 lg:px-10">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
-          <Link className="flex items-center gap-3" href="/versionB">
+          <Link className="flex items-center gap-3" href="/">
             <Image
               src="/images/logo.png"
               alt=""
@@ -127,9 +127,9 @@ export function Footer() {
             Links
           </p>
           <div className="mt-4 grid gap-2 text-white/78">
-            <Link href="/versionB/faqs">FAQs</Link>
-            <Link href="/versionB/impressum">Impressum</Link>
-            <Link href="/versionB/kontakt">Kontakt</Link>
+            <Link href="/faqs">FAQs</Link>
+            <Link href="/impressum">Impressum</Link>
+            <Link href="/kontakt">Kontakt</Link>
           </div>
         </div>
       </div>

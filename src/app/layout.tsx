@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Footer, Header } from "./components";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Praxis Chamarina | Klinische Psychologie in Wien",
+  title: "Praxis Chamarina | Psychologie in Wien",
   description:
     "Klinisch-psychologische Behandlung und Diagnostik für Erwachsene in Wien.",
   icons: {
@@ -33,7 +34,13 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <div className="min-h-screen bg-white text-[#14363b]">
+          <Header />
+          {children}
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }

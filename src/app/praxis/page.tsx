@@ -87,7 +87,7 @@ export default function PraxisPage() {
           </SoftCard>
         </div>
         <div className="mx-auto mt-10 max-w-7xl">
-          <CTA href="/versionB/kontakt">Termin anfragen</CTA>
+          <CTA href="/kontakt">Termin anfragen</CTA>
         </div>
       </section>
     </main>

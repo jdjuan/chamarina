@@ -30,7 +30,7 @@ export default function UeberMichPage() {
               </p>
             ))}
             <div className="mt-8">
-              <CTA href="/versionB/kontakt">Kontakt aufnehmen</CTA>
+              <CTA href="/kontakt">Kontakt aufnehmen</CTA>
             </div>
           </div>
         </div>

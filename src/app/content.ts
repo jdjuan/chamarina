@@ -9,13 +9,13 @@ export const contact = {
 };
 
 export const navItems = [
-  { href: "/versionB", label: "Startseite" },
-  { href: "/versionB/ueber-mich", label: "Über mich" },
-  { href: "/versionB/themen", label: "Themen & Schwerpunkte" },
-  { href: "/versionB/diagnostik", label: "Diagnostik" },
-  { href: "/versionB/ablauf-kosten", label: "Ablauf & Kosten" },
-  { href: "/versionB/praxis", label: "Praxis & Anfahrt" },
-  { href: "/versionB/kontakt", label: "Kontakt" },
+  { href: "/", label: "Startseite" },
+  { href: "/ueber-mich", label: "Über mich" },
+  { href: "/themen", label: "Themen & Schwerpunkte" },
+  { href: "/diagnostik", label: "Diagnostik" },
+  { href: "/ablauf-kosten", label: "Ablauf & Kosten" },
+  { href: "/praxis", label: "Praxis & Anfahrt" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
 
 export const homeContent = {
