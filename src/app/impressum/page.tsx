@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "../components";
-import { contact } from "../content";
+import { contact, impressumContent, privacyContent } from "../content";
 import { createPageMetadata } from "../seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -13,37 +13,33 @@ export const metadata: Metadata = createPageMetadata({
 export default function ImpressumPage() {
   return (
     <main>
-      <PageHero eyebrow="Impressum" title="Angaben zur Praxis">
-        <p>
-          Rechtliche Informationen zur Anbieterin dieser Website.
-        </p>
+      <PageHero eyebrow="Rechtliches" title={impressumContent.title}>
+        <p>{impressumContent.subtitle}</p>
       </PageHero>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-4xl rounded-[2.5rem] bg-[#f3fbf8] p-8 sm:p-10">
+        <div className="mx-auto max-w-4xl rounded-[2.5rem] bg-[#F4F8FB] p-8 sm:p-10">
           <div className="grid gap-10">
             <section>
-              <h2 className="text-2xl font-semibold text-[#14363b]">
+              <h2 className="text-2xl font-semibold text-[#0D2744]">
                 Medieninhaberin und Verantwortliche
               </h2>
-              <p className="mt-4 leading-8 text-[#506a70]">
-                Maria Chamarina
-                <br />
-                Klinische Psychologin
-                <br />
-                {contact.address}
-              </p>
+              <div className="mt-4 leading-8 text-[#53728A]">
+                {impressumContent.owner.map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-[#14363b]">
+              <h2 className="text-2xl font-semibold text-[#0D2744]">
                 Kontakt
               </h2>
-              <p className="mt-4 leading-8 text-[#506a70]">
+              <p className="mt-4 leading-8 text-[#53728A]">
                 E-Mail:{" "}
                 <a
                   aria-label={`E-Mail an ${contact.email} schreiben`}
-                  className="text-[#d7192a]"
+                  className="text-[#53728A]"
                   href={`mailto:${contact.email}`}
                 >
                   {contact.email}
@@ -52,36 +48,63 @@ export default function ImpressumPage() {
                 Telefon:{" "}
                 <a
                   aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
-                  className="text-[#d7192a]"
+                  className="text-[#53728A]"
                   href={`tel:${contact.phone.replaceAll(" ", "")}`}
                 >
                   {contact.phone}
                 </a>
+                <br />
+                Website: psychologie-chamarina.at
               </p>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-semibold text-[#14363b]">
-                Berufsbezeichnung
-              </h2>
-              <p className="mt-4 leading-8 text-[#506a70]">
-                Klinische Psychologin, verliehen in Österreich. Zuständige
-                Aufsichtsbehörde und berufsrechtliche Grundlagen richten sich
-                nach den geltenden österreichischen Bestimmungen für
-                Psycholog:innen.
-              </p>
-            </section>
+            {impressumContent.sections.map((section) => (
+              <section key={section.title}>
+                <h2 className="text-2xl font-semibold text-[#0D2744]">
+                  {section.title}
+                </h2>
+                <div className="mt-4 grid gap-2 leading-8 text-[#53728A]">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <section>
-              <h2 className="text-2xl font-semibold text-[#14363b]">
-                Haftung für Inhalte
-              </h2>
-              <p className="mt-4 leading-8 text-[#506a70]">
-                Die Inhalte dieser Website wurden sorgfältig erstellt. Für die
-                Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann
-                jedoch keine Gewähr übernommen werden.
-              </p>
-            </section>
+      <section className="bg-white px-5 pb-24 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-4xl font-semibold text-[#0D2744]">
+            {privacyContent.title}
+          </h2>
+          <div className="mt-8 grid gap-5">
+            {privacyContent.sections.map((section) => (
+              <section
+                className="rounded-[2rem] border border-[#B9CFDD] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.07)]"
+                key={section.title}
+              >
+                <h3 className="text-2xl font-semibold text-[#0D2744]">
+                  {section.title}
+                </h3>
+                <div className="mt-4 grid gap-3 leading-8 text-[#53728A]">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  {section.items ? (
+                    <ul className="grid gap-2 pl-5">
+                      {section.items.map((item) => (
+                        <li className="list-disc" key={item}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  {section.closing ? <p>{section.closing}</p> : null}
+                </div>
+              </section>
+            ))}
           </div>
         </div>
       </section>

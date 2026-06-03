@@ -98,7 +98,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Zum Inhalt springen
         </a>
-        <div className="min-h-screen bg-white text-[#14363b]">
+        <div className="min-h-screen bg-white text-[#0D2744]">
           <Header />
           <div id="main-content" tabIndex={-1}>
             {children}

@@ -7,7 +7,7 @@ import { createPageMetadata } from "../seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Über mich",
   description:
-    "Über Maria Chamarina, klinische Psychologin in Wien, ihre evidenzbasierte Arbeitsweise, Ausbildung und Erfahrung.",
+    "Über Maria Chamarina, klinische Psychologin in Wien, ihre Arbeitsweise, ihren beruflichen Hintergrund und ihre Erfahrung.",
   path: "/ueber-mich",
   image: "/images/maria.png",
   imageAlt: "Maria Chamarina, klinische Psychologin in Wien",
@@ -22,7 +22,7 @@ export default function UeberMichPage() {
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-[#e9f8f5]">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-[#F4F8FB]">
             <Image
               src="/images/maria.png"
               alt="Maria Chamarina"
@@ -33,7 +33,7 @@ export default function UeberMichPage() {
             />
           </div>
 
-          <div className="text-lg leading-9 text-[#506a70]">
+          <div className="text-lg leading-9 text-[#53728A]">
             {aboutContent.workParagraphs.slice(1).map((paragraph) => (
               <p className="mt-5 first:mt-0" key={paragraph}>
                 {paragraph}
@@ -46,24 +46,21 @@ export default function UeberMichPage() {
         </div>
       </section>
 
-      <section className="bg-[#e9f8f5] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d7192a]">
-            {aboutContent.educationTitle}
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
+            Erfahrung
           </p>
-          <h2 className="mt-4 text-4xl font-semibold text-[#14363b]">
+          <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
             {aboutContent.educationTitle}
           </h2>
           <div className="mt-10 grid gap-4">
-            {educationItems.map((item, index) => (
+            {educationItems.map((item) => (
               <div
-                className="grid gap-4 rounded-[1.75rem] bg-white p-6 sm:grid-cols-[70px_1fr]"
+                className="rounded-[1.75rem] bg-white p-6"
                 key={item}
               >
-                <span className="font-semibold text-[#d7192a]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <p className="leading-7 text-[#506a70]">{item}</p>
+                <p className="leading-7 text-[#53728A]">{item}</p>
               </div>
             ))}
           </div>

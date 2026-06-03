@@ -41,8 +41,8 @@ summary::-webkit-details-marker {
   z-index: 100;
   transform: translateY(-160%);
   border-radius: 999px;
-  background: #d7192a;
-  color: #ffffff;
+  background: #FF929A;
+  color: #0D2744;
   font-weight: 700;
   padding: 0.75rem 1rem;
   transition: transform 160ms ease;
@@ -53,13 +53,13 @@ summary::-webkit-details-marker {
 }
 
 :where(a, button, summary, [tabindex]):focus-visible {
-  outline: 3px solid #d7192a;
+  outline: 3px solid #FF929A;
   outline-offset: 4px;
 }
 
 ::selection {
-  background: #d7192a;
-  color: #ffffff;
+  background: #FF929A;
+  color: #0D2744;
 }
 
 @media (prefers-reduced-motion: reduce) {

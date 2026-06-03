@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { PageHero, SoftCard } from "../components";
 import { contact, contactContent, practiceContent } from "../content";
 import { createPageMetadata } from "../seo";
@@ -13,7 +14,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function KontaktPage() {
   return (
     <main>
-      <PageHero eyebrow={contactContent.title} title={contactContent.title}>
+      <PageHero eyebrow="Erreichbarkeit" title={contactContent.title}>
         <p>{contactContent.phoneIntro}</p>
       </PageHero>
 
@@ -24,8 +25,8 @@ export default function KontaktPage() {
             href={`mailto:${contact.email}`}
           >
             <SoftCard title="E-Mail">
-              <p>{contactContent.mail}</p>
-              <p className="mt-3 text-2xl font-semibold text-[#14363b]">
+              <p>Schreiben Sie mir gerne per E-Mail.</p>
+              <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contact.email}
               </p>
             </SoftCard>
@@ -37,8 +38,8 @@ export default function KontaktPage() {
             target="_blank"
           >
             <SoftCard title="WhatsApp">
-              <p>{contactContent.whatsapp}</p>
-              <p className="mt-3 text-2xl font-semibold text-[#14363b]">
+              <p>Kurze Terminfragen können Sie auch per WhatsApp stellen.</p>
+              <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contact.phone}
               </p>
             </SoftCard>
@@ -48,8 +49,11 @@ export default function KontaktPage() {
             href={`tel:${contact.phone.replaceAll(" ", "")}`}
           >
             <SoftCard title="Telefon">
-              <p>{contactContent.phoneIntro}</p>
-              <p className="mt-3 text-2xl font-semibold text-[#14363b]">
+              <p>
+                Sollten Sie mich nicht erreichen, melde ich mich umgehend
+                zurück.
+              </p>
+              <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contactContent.phone}
               </p>
             </SoftCard>
@@ -57,17 +61,52 @@ export default function KontaktPage() {
         </div>
       </section>
 
-      <section className="bg-[#fff7ee] px-5 py-20 sm:px-8 lg:px-10">
+      <section
+        className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10"
+        id="online-buchung"
+      >
+        <Script
+          id="offisy-config"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html:
+              'window.offisy = window.offisy || {}; window.offisy.apiKey = "60f36d12-789b-4af5-8f68-ddb1cb390d11";',
+          }}
+        />
+        <Script
+          src="https://buchen.offisy.at/api/booking/v1/app.js"
+          strategy="afterInteractive"
+        />
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
+              Online-Buchung
+            </p>
+            <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
+              Termin buchen
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-[#53728A]">
+              Wählen Sie hier direkt einen freien Termin für ein kostenloses
+              Erstgespräch aus.
+            </p>
+          </div>
+          <div className="min-h-[520px] rounded-[2rem] border border-[#B9CFDD] bg-white p-3 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-5">
+            <div id="offisyCalendar" />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#FFFFFF] px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d7192a]">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
               Praxis
             </p>
-            <h2 className="mt-4 text-4xl font-semibold text-[#14363b]">
+            <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
               {practiceContent.address}
             </h2>
           </div>
-          <p className="text-lg leading-8 text-[#506a70]">
+          <p className="text-lg leading-8 text-[#53728A]">
             {practiceContent.addressText} Öffentlich erreichbar über U1 / U3
             Stephansplatz, U4 Schwedenplatz sowie Straßenbahn und Bus in
             Gehweite.

@@ -3,7 +3,7 @@ import { contact, focusAreas, homeContent, practiceContent } from "./content";
 
 export const siteName = "Praxis Chamarina";
 export const baseUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://chamarina-praxis.at"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://psychologie-chamarina.at"
 ).replace(/\/$/, "");
 
 export const defaultDescription =
@@ -122,5 +122,5 @@ export const practiceJsonLd = {
     },
   ],
   hasMap:
-    "https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%201010%20Wien",
+    "https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%2F14%201010%20Wien",
 };

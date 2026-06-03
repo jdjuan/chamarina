@@ -14,7 +14,7 @@ export default function AblaufKostenPage() {
   return (
     <main>
       <PageHero
-        eyebrow={processContent.title}
+        eyebrow="Erstgespräch, Kosten & Rahmen"
         title={processContent.title}
       >
         <p>{processContent.steps[0].paragraphs[0]}</p>
@@ -22,13 +22,13 @@ export default function AblaufKostenPage() {
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d7192a]">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
             {processContent.processTitle}
           </p>
           <div className="mt-8 grid gap-5 lg:grid-cols-3">
             {processContent.steps.map((step, index) => (
               <SoftCard title={step.title} key={step.title}>
-                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#d7192a]">
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#53728A]">
                   Schritt {index + 1}
                 </p>
                 <div className="grid gap-3">
@@ -38,7 +38,7 @@ export default function AblaufKostenPage() {
                   <ul className="grid gap-2">
                     {step.items.map((item) => (
                       <li className="flex gap-3" key={item}>
-                        <span aria-hidden="true" className="text-[#d7192a]">
+                        <span aria-hidden="true" className="text-[#53728A]">
                           •
                         </span>
                         <span>{item}</span>
@@ -53,12 +53,12 @@ export default function AblaufKostenPage() {
         </div>
       </section>
 
-      <section className="bg-[#e9f8f5] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
           <SoftCard title={processContent.costTitle}>
             <ul className="grid gap-2">
               {processContent.costs.map((item) => (
-                <li className="text-2xl font-semibold text-[#14363b]" key={item}>
+                <li className="text-2xl font-semibold text-[#0D2744]" key={item}>
                   {item}
                 </li>
               ))}
@@ -95,7 +95,7 @@ export default function AblaufKostenPage() {
           </SoftCard>
         </div>
         <div className="mx-auto mt-10 max-w-7xl">
-          <CTA href="/kontakt">Erstgespräch vereinbaren</CTA>
+          <CTA href="/kontakt#online-buchung">Erstgespräch vereinbaren</CTA>
         </div>
       </section>
     </main>

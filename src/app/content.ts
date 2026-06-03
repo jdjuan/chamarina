@@ -1,11 +1,11 @@
-export const siteUrl = "Chamarina-praxis.at";
+export const siteUrl = "psychologie-chamarina.at";
 
 export const contact = {
   email: "kontakt@psychologie-chamarina.at",
   phone: "+43 665 67243426",
   whatsapp: "https://wa.me/4366567243426",
-  addressLine: "Fischerstiege 10",
-  address: "Fischerstiege 10, 1010 Wien",
+  addressLine: "Fischerstiege 10/14",
+  address: "Fischerstiege 10/14, 1010 Wien",
 };
 
 export const navItems = [
@@ -19,7 +19,7 @@ export const navItems = [
 ];
 
 export const homeContent = {
-  title: "Klinisch-psychologische Behandlung & Diagnostik in Wien",
+  title: "Klinisch-Psychologische Behandlung & Diagnostik in Wien",
   subtitle:
     "Unterstützung bei Angst, Zwang, Depression, Beziehungsthemen, Sexualität und anderen psychischen Belastungen.",
   button: "Termin buchen",
@@ -39,8 +39,8 @@ export const homeContent = {
   diagnosticsTitle: "Diagnostik",
   diagnosticsText:
     "Zeitnahe diagnostische Abklärung und klinisch-psychologische Diagnostik für Erwachsene.",
-  settingTitle: "Praxis/ Setting",
-  settingItems: ["Wien, 1. Bezirk", "online oder vor Ort"],
+  settingTitle: "Praxis und Setting",
+  settingItems: ["Wien, 1. Bezirk", "online oder vor Ort", "120 € pro Einheit"],
   closing:
     "Wenn Sie das Gefühl haben, dass ein Gespräch hilfreich sein könnte, können Sie gerne ein kostenloses Erstgespräch vereinbaren.",
 };
@@ -51,16 +51,12 @@ export const aboutContent = {
   title: "Über mich",
   workTitle: "Wie ich arbeite",
   workParagraphs: [
-    "Als klinische Psychologin arbeite ich evidenzbasiert – das heißt, ich orientiere mich an Methoden, die sich wissenschaftlich bewährt haben und vielen Menschen in ähnlichen Situationen helfen. Gleichzeitig ist mir wichtig, dass wir gemeinsam schauen, was für Sie persönlich passt.",
-    "Ich bin eher ein offener und direkter Mensch.",
-    "Humor darf dabei genauso Platz haben wie ernstere Themen – und wenn es passt, auch mal ein klar ausgesprochenes Wort.",
-    "Was mich besonders interessiert, sind individuelle Lösungen.",
-    "Auch wenn sich Probleme ähneln, ist der Weg zum Ziel oft unterschiedlich.",
-    "Manchmal hilft es, Dinge gemeinsam aufzuschreiben, sie werden dadurch greifbarer und oft auch leichter veränderbar.",
-    "Und wenn etwas nicht funktioniert, suchen wir gemeinsam nach einem anderen Ansatz.",
-    "Ein bisschen wie Detektivarbeit: Schritt für Schritt herausfinden, was hilft – und was nicht.",
+    "Ich bin ein offener und direkter Mensch. In meiner Arbeit dürfen Humor und Leichtigkeit genauso Platz haben wie ernste Themen.",
+    "Ursprünglich komme ich aus St. Petersburg und habe später einige Zeit in Japan gelebt. Unterschiedliche Menschen, Lebensrealitäten und kulturelle Perspektiven kennenzulernen, empfinde ich bis heute als bereichernd und inspirierend, sowohl persönlich als auch in meiner Arbeit.",
+    "Besonders wichtig ist mir, gemeinsam individuelle Lösungen zu finden. Auch wenn sich Probleme ähneln, ist der passende Weg oft sehr unterschiedlich. Mich interessiert dabei nicht nur das Symptom selbst, sondern auch der Mensch dahinter, wie jemand denkt, fühlt, Beziehungen erlebt und welche Erfahrungen geprägt haben. Oft hilft es, Gedanken, Muster oder nächste Schritte gemeinsam aufzuschreiben. Dadurch werden sie greifbarer und Veränderungen leichter möglich. Wenn ein Ansatz nicht ganz passt, schauen wir gemeinsam weiter und versuchen, einen anderen Zugang zu finden.",
+    "Psychologische Arbeit ist für mich oft ein bisschen wie Detektivarbeit. Schritt für Schritt gemeinsam verstehen, was hilfreich ist und was vielleicht noch fehlt.",
   ],
-  educationTitle: "Ausbildung",
+  educationTitle: "Beruflicher Hintergrund",
 };
 
 export const educationItems = [
@@ -258,6 +254,7 @@ export const practiceContent = {
     "Die Praxis liegt in einer Kurzparkzone. Parkplätze sind in der Umgebung vorhanden, jedoch je nach Tageszeit begrenzt.",
   appointmentTitle: "Hinweise zum Termin",
   appointmentParagraphs: [
+    "Derzeit finden Termine montags und donnerstags in der Praxis statt. Online-Termine sind freitags nach Vereinbarung möglich.",
     "Ich bitte Sie, nicht deutlich vor dem vereinbarten Termin zu kommen, da ich in der Regel noch in einer laufenden Einheit bin.",
     "Die Praxis ist leider nicht barrierefrei.",
     "Vereinbarte Termine sind verbindlich.",
@@ -268,11 +265,118 @@ export const practiceContent = {
 
 export const contactContent = {
   title: "Kontakt",
-  mail: "Per Mail kontakt@psychologie-chamarina.at",
-  whatsapp: "WhatsApp +43 665 67243426",
+  mail: "E-Mail",
+  whatsapp: "WhatsApp",
   phoneIntro:
-    "Telefonisch. Sollten Sie mich nicht erreichen, melde ich mich umgehend zurück.",
+    "Telefon, Chat oder per E-Mail. Sollten Sie mich nicht erreichen, melde ich mich umgehend zurück.",
   phone: "+43 665 67243426",
+};
+
+export const impressumContent = {
+  title: "Impressum",
+  subtitle: "Angaben gemäß § 5 ECG, § 24 Mediengesetz",
+  owner: [
+    "Maria Chamarina",
+    "Klinische Psychologin",
+    "Praxisadresse:",
+    "Fischerstiege 10/14",
+    "1010 Wien",
+  ],
+  contact: [
+    `Telefon: ${contact.phone}`,
+    `E-Mail: ${contact.email}`,
+    `Website: ${siteUrl}`,
+  ],
+  sections: [
+    {
+      title: "Berufsbezeichnung",
+      paragraphs: ["Klinische Psychologin (verliehen in Österreich)"],
+    },
+    {
+      title: "Berufsrechtliche Vorschriften",
+      paragraphs: ["Psychologengesetz 2013", "Rechtsinformationssystem des Bundes (RIS)"],
+    },
+    {
+      title: "Aufsichtsbehörde",
+      paragraphs: [
+        "Bundesministerium für Soziales, Gesundheit, Pflege und Konsumentenschutz",
+      ],
+    },
+    {
+      title: "Mitgliedschaften / Eintragung",
+      paragraphs: [
+        "Eingetragen in die Liste der Klinischen Psycholog:innen des Bundesministeriums für Soziales, Gesundheit, Pflege und Konsumentenschutz.",
+      ],
+    },
+    {
+      title: "Medieninhaberin und für den Inhalt verantwortlich",
+      paragraphs: ["Maria Chamarina", "Fischerstiege 10/14, 1010 Wien"],
+    },
+    {
+      title: "Unternehmensgegenstand",
+      paragraphs: [
+        "Psychologische Behandlung, Beratung sowie klinisch-psychologische Diagnostik.",
+      ],
+    },
+  ],
+};
+
+export const privacyContent = {
+  title: "Datenschutzerklärung",
+  sections: [
+    {
+      title: "Datenschutz",
+      paragraphs: [
+        "Der Schutz Ihrer persönlichen Daten ist mir ein besonderes Anliegen. Ihre Daten werden ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG) verarbeitet.",
+      ],
+    },
+    {
+      title: "Kontaktaufnahme",
+      paragraphs: [
+        "Wenn Sie per E-Mail oder Kontaktformular Kontakt aufnehmen, werden die von Ihnen angegebenen Daten zur Bearbeitung Ihrer Anfrage gespeichert. Diese Daten werden nicht ohne Ihre Einwilligung weitergegeben.",
+        "Bitte senden Sie über Kontaktformulare oder unverschlüsselte E-Mails keine sensiblen Gesundheitsdaten.",
+      ],
+    },
+    {
+      title: "Server-Logfiles",
+      paragraphs: [
+        "Der Hostinganbieter dieser Website erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles. Dies umfasst beispielsweise:",
+      ],
+      items: [
+        "IP-Adresse",
+        "Browsertyp",
+        "Datum und Uhrzeit des Zugriffs",
+        "aufgerufene Seiten",
+      ],
+      closing:
+        "Diese Daten dienen der technischen Sicherheit und werden nicht bestimmten Personen zugeordnet.",
+    },
+    {
+      title: "Cookies",
+      paragraphs: [
+        "Diese Website verwendet nur technisch notwendige Cookies, sofern nicht ausdrücklich anders angegeben.",
+      ],
+    },
+    {
+      title: "Ihre Rechte",
+      paragraphs: ["Ihnen stehen grundsätzlich die Rechte auf:"],
+      items: [
+        "Auskunft",
+        "Berichtigung",
+        "Löschung",
+        "Einschränkung",
+        "Datenübertragbarkeit",
+        "Widerruf",
+        "Widerspruch",
+      ],
+      closing:
+        "zu. Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt, können Sie sich bei der österreichischen Datenschutzbehörde beschweren: Österreichische Datenschutzbehörde",
+    },
+    {
+      title: "Verantwortliche für die Datenverarbeitung",
+      paragraphs: ["Maria Chamarina", contact.email],
+    },
+  ],
 };
 
 export const faqIntro = "Häufige Fragen";

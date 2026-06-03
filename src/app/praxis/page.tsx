@@ -7,7 +7,7 @@ import { createPageMetadata } from "../seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Praxis & Anfahrt",
   description:
-    "Adresse, Anfahrt und Termin-Hinweise zur Praxis Chamarina in der Fischerstiege 10 im 1. Bezirk in Wien.",
+    "Adresse, Anfahrt und Termin-Hinweise zur Praxis Chamarina in der Fischerstiege 10/14 im 1. Bezirk in Wien.",
   path: "/praxis",
   image: "/images/praxis2.png",
 });
@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function PraxisPage() {
   return (
     <main>
-      <PageHero eyebrow={practiceContent.title} title={practiceContent.title}>
+      <PageHero eyebrow="Praxis im 1. Bezirk" title={practiceContent.title}>
         <p>{practiceContent.addressText}</p>
       </PageHero>
 
@@ -23,14 +23,14 @@ export default function PraxisPage() {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="grid gap-5">
             <SoftCard title={practiceContent.addressTitle}>
-              <p className="text-2xl font-semibold text-[#14363b]">
+              <p className="text-2xl font-semibold text-[#0D2744]">
                 {practiceContent.address}
               </p>
               <p className="mt-3">{practiceContent.addressText}</p>
               <a
                 aria-label="Route zur Praxis Chamarina in Google Maps öffnen"
-                className="mt-5 inline-flex font-semibold text-[#d7192a]"
-                href="https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%201010%20Wien"
+                className="mt-5 inline-flex font-semibold text-[#53728A]"
+                href="https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%2F14%201010%20Wien"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -38,7 +38,7 @@ export default function PraxisPage() {
               </a>
             </SoftCard>
             <SoftCard title={practiceContent.directionsTitle}>
-              <p className="font-semibold text-[#14363b]">
+              <p className="font-semibold text-[#0D2744]">
                 {practiceContent.publicTitle}
               </p>
               <ul className="mt-3 grid gap-2">
@@ -46,7 +46,7 @@ export default function PraxisPage() {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <p className="mt-5 font-semibold text-[#14363b]">
+              <p className="mt-5 font-semibold text-[#0D2744]">
                 {practiceContent.carTitle}
               </p>
               <p className="mt-3">{practiceContent.carText}</p>
@@ -87,7 +87,7 @@ export default function PraxisPage() {
         </div>
       </section>
 
-      <section className="bg-[#fff7ee] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#FFFFFF] px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <SoftCard title={practiceContent.appointmentTitle}>
             <div className="grid gap-3">
@@ -98,7 +98,7 @@ export default function PraxisPage() {
           </SoftCard>
         </div>
         <div className="mx-auto mt-10 max-w-7xl">
-          <CTA href="/kontakt">Termin anfragen</CTA>
+          <CTA href="/kontakt#online-buchung">Termin anfragen</CTA>
         </div>
       </section>
     </main>
