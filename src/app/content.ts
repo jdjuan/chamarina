@@ -1,4 +1,4 @@
-export const siteUrl = "psychologie-chamarina.at";
+export const siteUrl = "www.psychologie-chamarina.at";
 
 export const contact = {
   email: "kontakt@psychologie-chamarina.at",

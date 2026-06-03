@@ -3,7 +3,7 @@ import { contact, focusAreas, homeContent, practiceContent } from "./content";
 
 export const siteName = "Praxis Chamarina";
 export const baseUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://psychologie-chamarina.at"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.psychologie-chamarina.at"
 ).replace(/\/$/, "");
 
 export const defaultDescription =

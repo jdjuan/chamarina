@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "../components";
-import { contact, impressumContent, privacyContent } from "../content";
+import { contact, impressumContent, privacyContent, siteUrl } from "../content";
 import { createPageMetadata } from "../seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -54,7 +54,7 @@ export default function ImpressumPage() {
                   {contact.phone}
                 </a>
                 <br />
-                Website: psychologie-chamarina.at
+                Website: {siteUrl}
               </p>
             </section>
 
