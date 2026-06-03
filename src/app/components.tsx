@@ -45,7 +45,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            className="rounded-full bg-[#FF929A] px-4 py-2.5 font-semibold text-[#0D2744] shadow-[0_12px_26px_rgba(255,146,154,0.28)] transition hover:bg-[#ff7f8a]"
+            className="rounded-lg bg-[#FF929A] px-4 py-2.5 font-semibold text-[#0D2744] shadow-[0_12px_26px_rgba(255,146,154,0.28)] transition hover:bg-[#ff7f8a]"
             href="/kontakt#online-buchung"
           >
             Termin buchen
@@ -56,7 +56,7 @@ export function Header() {
           <button
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Navigation schließen" : "Navigation öffnen"}
-            className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-[#7691AD] text-xl text-[#0D2744]"
+            className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-lg border border-[#7691AD] text-xl text-[#0D2744]"
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
           >
@@ -68,7 +68,7 @@ export function Header() {
             </span>
           </button>
           {mobileOpen ? (
-            <div className="absolute right-0 top-14 w-[min(84vw,320px)] rounded-3xl border border-[#B9CFDD] bg-white p-5 shadow-[0_22px_55px_rgba(13,39,68,0.16)]">
+            <div className="absolute right-0 top-14 w-[min(84vw,320px)] rounded-lg border border-[#B9CFDD] bg-white p-5 shadow-[0_22px_55px_rgba(13,39,68,0.16)]">
               <nav
                 aria-label="Mobile Hauptnavigation"
                 className="grid gap-3 text-base font-medium text-[#0D2744]"
@@ -84,7 +84,7 @@ export function Header() {
                   </Link>
                 ))}
                 <Link
-                  className="mt-2 rounded-full bg-[#FF929A] px-5 py-3 text-center text-sm font-semibold text-[#0D2744]"
+                  className="mt-2 rounded-lg bg-[#FF929A] px-5 py-3 text-center text-sm font-semibold text-[#0D2744]"
                   href="/kontakt#online-buchung"
                   onClick={() => setMobileOpen(false)}
                 >
@@ -174,19 +174,32 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-5xl text-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
-          {eyebrow}
-        </p>
-        <h1 className="mt-5 text-4xl font-semibold leading-tight text-[#0D2744] sm:text-6xl">
-          {title}
-        </h1>
-        {children ? (
-          <div className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-[#53728A]">
-            {children}
-          </div>
-        ) : null}
+    <section className="relative overflow-hidden bg-[#0D2744] px-5 py-20 text-white sm:px-8 lg:px-10 lg:py-24">
+      <div className="absolute inset-x-0 top-0 h-2 bg-[#FF929A]" />
+      <div className="absolute inset-x-0 bottom-0 h-16 bg-[#B9CFDD]" />
+      <div className="relative mx-auto grid max-w-7xl gap-10 md:grid-cols-[1fr_240px] md:items-end">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#FF929A]">
+            {eyebrow}
+          </p>
+          <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+            {title}
+          </h1>
+          {children ? (
+            <div className="mt-6 max-w-3xl text-lg leading-8 text-[#E8F1F6]">
+              {children}
+            </div>
+          ) : null}
+        </div>
+        <div
+          aria-hidden="true"
+          className="hidden grid-cols-2 gap-3 pb-4 md:grid"
+        >
+          <span className="h-24 rounded-lg bg-[#B9CFDD]" />
+          <span className="h-24 rounded-lg bg-[#7691AD]" />
+          <span className="h-24 rounded-lg bg-[#53728A]" />
+          <span className="h-24 rounded-lg bg-[#FF929A]" />
+        </div>
       </div>
     </section>
   );
@@ -228,11 +241,11 @@ export function CTA({
   const className =
     variant === "primary"
       ? "bg-[#FF929A] text-[#0D2744] shadow-[0_14px_30px_rgba(255,146,154,0.28)] hover:bg-[#ff7f8a]"
-      : "border border-[#7691AD] bg-white text-[#0D2744] hover:border-[#FF929A] hover:text-[#0D2744]";
+      : "border border-[#B9CFDD] bg-white text-[#0D2744] hover:border-[#FF929A] hover:bg-[#B9CFDD]/35";
 
   return (
     <Link
-      className={`inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition ${className}`}
       href={href}
     >
       {children}
@@ -250,7 +263,7 @@ export function SoftCard({
   href?: string;
 }) {
   const content = (
-    <article className="h-full rounded-[2rem] border border-[#B9CFDD] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_58px_rgba(13,39,68,0.12)]">
+    <article className="h-full rounded-lg border border-[#B9CFDD] border-l-[8px] border-l-[#FF929A] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_58px_rgba(13,39,68,0.12)]">
       <h3 className="text-2xl font-semibold text-[#0D2744]">{title}</h3>
       <div className="mt-4 leading-7 text-[#53728A]">{children}</div>
       {href ? (

@@ -53,7 +53,7 @@ export default function AblaufKostenPage() {
         </div>
       </section>
 
-      <section className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
           <SoftCard title={processContent.costTitle}>
             <ul className="grid gap-2">
@@ -94,8 +94,13 @@ export default function AblaufKostenPage() {
             </div>
           </SoftCard>
         </div>
-        <div className="mx-auto mt-10 max-w-7xl">
-          <CTA href="/kontakt#online-buchung">Erstgespräch vereinbaren</CTA>
+        <div className="mx-auto mt-10 max-w-7xl rounded-lg bg-[#0D2744] p-8 text-white sm:p-10">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="max-w-2xl text-3xl font-semibold">
+              Kostenloses Erstgespräch vereinbaren
+            </h2>
+            <CTA href="/kontakt#online-buchung">Termin buchen</CTA>
+          </div>
         </div>
       </section>
     </main>

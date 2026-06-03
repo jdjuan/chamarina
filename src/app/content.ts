@@ -19,7 +19,7 @@ export const navItems = [
 ];
 
 export const homeContent = {
-  title: "Klinisch-Psychologische Behandlung & Diagnostik in Wien",
+  title: "Klinisch-psychologische Behandlung & Diagnostik in Wien",
   subtitle:
     "Unterstützung bei Angst, Zwang, Depression, Beziehungsthemen, Sexualität und anderen psychischen Belastungen.",
   button: "Termin buchen",

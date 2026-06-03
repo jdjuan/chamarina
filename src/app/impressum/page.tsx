@@ -18,8 +18,8 @@ export default function ImpressumPage() {
       </PageHero>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-4xl rounded-[2.5rem] bg-[#F4F8FB] p-8 sm:p-10">
-          <div className="grid gap-10">
+        <div className="mx-auto max-w-4xl rounded-lg border border-[#B9CFDD] border-l-[10px] border-l-[#FF929A] bg-[#F4F8FB] p-8 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-10">
+          <div className="grid gap-10 break-words">
             <section>
               <h2 className="text-2xl font-semibold text-[#0D2744]">
                 Medieninhaberin und Verantwortliche
@@ -74,15 +74,15 @@ export default function ImpressumPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 pb-24 sm:px-8 lg:px-10">
+      <section className="bg-[#B9CFDD]/35 px-5 py-24 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-4xl font-semibold text-[#0D2744]">
+          <h2 className="break-words text-3xl font-semibold text-[#0D2744] sm:text-4xl">
             {privacyContent.title}
           </h2>
           <div className="mt-8 grid gap-5">
             {privacyContent.sections.map((section) => (
               <section
-                className="rounded-[2rem] border border-[#B9CFDD] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.07)]"
+                className="rounded-lg border border-[#B9CFDD] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.07)] break-words"
                 key={section.title}
               >
                 <h3 className="text-2xl font-semibold text-[#0D2744]">

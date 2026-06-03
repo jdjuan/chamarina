@@ -54,7 +54,7 @@ export default function PraxisPage() {
           </div>
 
           <div className="grid gap-5">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-[0_22px_55px_rgba(13,39,68,0.14)]">
               <Image
                 src="/images/praxis2.png"
                 alt="Sitzbereich der Praxis mit hellen Fenstern"
@@ -64,7 +64,7 @@ export default function PraxisPage() {
               />
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
                   src="/images/praxis1.png"
                   alt="Praxisraum mit Sesseln, Pflanzen und Flipchart"
@@ -73,7 +73,7 @@ export default function PraxisPage() {
                   className="object-cover"
                 />
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
                   src="/images/praxis3.png"
                   alt="Wartebereich mit zwei Sesseln und Bildern"
@@ -87,7 +87,7 @@ export default function PraxisPage() {
         </div>
       </section>
 
-      <section className="bg-[#FFFFFF] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <SoftCard title={practiceContent.appointmentTitle}>
             <div className="grid gap-3">

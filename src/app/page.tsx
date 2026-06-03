@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { CTA, SectionTitle, SoftCard } from "./components";
 import { contact, homeContent, supportTopics } from "./content";
 import { createPageMetadata, defaultDescription } from "./seo";
 
@@ -21,175 +20,159 @@ export const metadata: Metadata = {
   },
 };
 
-const topicPills = [
+const quickLinks = [
   {
-    card: "border-[#B9CFDD] bg-white hover:border-[#FF929A] hover:bg-[#F4F8FB]",
-    dot: "bg-[#FF929A] shadow-[0_0_0_6px_rgba(255,146,154,0.1)]",
+    title: homeContent.diagnosticsTitle,
+    text: homeContent.diagnosticsText,
+    href: "/diagnostik",
+    color: "bg-[#53728A]",
   },
   {
-    card: "border-[#B9CFDD] bg-white hover:border-[#53728A] hover:bg-[#F4F8FB]",
-    dot: "bg-[#53728A] shadow-[0_0_0_6px_rgba(83,114,138,0.12)]",
+    title: homeContent.settingTitle,
+    text: homeContent.settingItems.join(" · "),
+    href: "/praxis",
+    color: "bg-[#7691AD]",
   },
   {
-    card: "border-[#B9CFDD] bg-white hover:border-[#7691AD] hover:bg-[#F4F8FB]",
-    dot: "bg-[#7691AD] shadow-[0_0_0_6px_rgba(118,145,173,0.14)]",
-  },
-  {
-    card: "border-[#B9CFDD] bg-white hover:border-[#B9CFDD] hover:bg-[#F4F8FB]",
-    dot: "bg-[#B9CFDD] shadow-[0_0_0_6px_rgba(185,207,221,0.2)]",
-  },
-  {
-    card: "border-[#B9CFDD] bg-white hover:border-[#0D2744] hover:bg-[#F4F8FB]",
-    dot: "bg-[#0D2744] shadow-[0_0_0_6px_rgba(13,39,68,0.1)]",
+    title: "Ablauf & Kosten",
+    text: "Kostenloses Erstgespräch, klare Rahmenbedingungen und 120 € pro Einheit.",
+    href: "/ablauf-kosten",
+    color: "bg-[#0D2744]",
   },
 ];
 
 export default function Home() {
   return (
-    <main>
-      <section className="relative overflow-hidden bg-[#FFFFFF]">
-        <Image
-          src="/images/praxis1.png"
-          alt="Heller Praxisraum der Praxis Chamarina"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center opacity-38"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,247,238,0.95)_0%,rgba(236,251,246,0.9)_48%,rgba(238,246,255,0.58)_100%)]" />
-        <div className="relative mx-auto grid min-h-[calc(100svh-73px)] max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 sm:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:px-10 lg:py-20">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
+    <main className="bg-white text-[#0D2744]">
+      <section className="relative overflow-hidden bg-[#0D2744] text-white">
+        <div className="absolute inset-x-0 top-0 h-3 bg-[#FF929A]" />
+        <div className="absolute bottom-0 left-0 h-40 w-full bg-[#B9CFDD]" />
+        <div className="relative mx-auto grid min-h-[calc(100svh-89px)] max-w-7xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:px-10 lg:py-20">
+          <div className="flex flex-col justify-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#B9CFDD]">
               Maria Chamarina, BA MSc
-              <span className="mt-2 block tracking-[0.18em]">
+              <span className="mt-2 block text-[#FF929A]">
                 Klinische Psychologin
               </span>
             </p>
-            <h1 className="mt-6 text-3xl font-semibold leading-[1.08] text-[#0D2744] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-7 max-w-3xl text-4xl font-semibold leading-[1.05] sm:text-6xl">
               {homeContent.title}
             </h1>
-            <p className="mt-6 max-w-xl text-xl leading-9 text-[#0D2744]">
+            <p className="mt-7 max-w-2xl text-xl leading-9 text-[#E8F1F6]">
               {homeContent.subtitle}
             </p>
+            <div className="mt-7 flex items-center gap-4 rounded-lg border border-[#B9CFDD]/40 bg-white/8 p-3 lg:hidden">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-[#B9CFDD]">
+                <Image
+                  src="/images/maria.png"
+                  alt="Maria Chamarina"
+                  fill
+                  sizes="96px"
+                  className="object-cover object-top"
+                />
+              </div>
+              <p className="text-sm font-semibold leading-6 text-[#E8F1F6]">
+                Wien, 1. Bezirk · online oder vor Ort · 120 € pro Einheit
+              </p>
+            </div>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <CTA href="/kontakt#online-buchung">{homeContent.button}</CTA>
-              <CTA href="/diagnostik" variant="secondary">
-                Mehr zur Diagnostik
-              </CTA>
+              <Link
+                className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#FF929A] px-6 py-3 text-sm font-semibold text-[#0D2744] shadow-[0_18px_40px_rgba(255,146,154,0.3)] transition hover:bg-[#ff7f8a]"
+                href="/kontakt#online-buchung"
+              >
+                {homeContent.button}
+              </Link>
+              <Link
+                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-[#B9CFDD] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[#0D2744]"
+                href="/themen"
+              >
+                Themen ansehen
+              </Link>
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[310px] sm:max-w-[360px] lg:ml-auto lg:mr-0 lg:max-w-[440px]">
-            <div className="absolute -left-5 top-8 h-28 w-28 rounded-[2rem] bg-[#B9CFDD] sm:-left-8 sm:h-36 sm:w-36" />
-            <div className="absolute -right-4 bottom-12 h-24 w-24 rounded-[1.75rem] bg-[#FF929A]/45 sm:-right-8 sm:h-32 sm:w-32" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-[#F4F8FB] shadow-[0_28px_70px_rgba(20,54,59,0.16)]">
-              <Image
-                src="/images/maria.png"
-                alt="Maria Chamarina"
-                fill
-                priority
-                sizes="430px"
-                className="object-cover object-top"
-              />
-            </div>
-            <div className="relative -mt-8 ml-auto max-w-[230px] rounded-3xl bg-white p-5 shadow-[0_18px_44px_rgba(20,54,59,0.13)]">
-              <p className="text-sm font-semibold leading-6 text-[#0D2744]">
-                Wien, 1. Bezirk · online oder vor Ort
-              </p>
+          <div className="relative flex items-end">
+            <div className="absolute -right-8 top-10 h-36 w-36 rounded-lg bg-[#FF929A]" />
+            <div className="absolute bottom-20 left-0 h-32 w-32 rounded-lg bg-[#53728A]" />
+            <div className="relative grid w-full gap-5 rounded-lg bg-white p-4 shadow-[0_28px_70px_rgba(0,0,0,0.24)] sm:p-5">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-[#B9CFDD]">
+                <Image
+                  src="/images/maria.png"
+                  alt="Maria Chamarina"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {homeContent.settingItems.map((item) => (
+                  <p
+                    className="rounded-lg bg-[#B9CFDD] px-4 py-3 text-sm font-semibold text-[#0D2744]"
+                    key={item}
+                  >
+                    {item}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="bg-white px-5 py-24 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <SectionTitle
-            eyebrow="Kurz vorgestellt"
-            title={homeContent.welcomeTitle}
-          >
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
+              Kurz vorgestellt
+            </p>
+            <h2 className="mt-4 max-w-2xl text-4xl font-semibold leading-tight text-[#0D2744] sm:text-5xl">
+              {homeContent.welcomeTitle}
+            </h2>
+          </div>
+          <div className="rounded-lg border-l-[10px] border-[#FF929A] bg-[#F4F8FB] p-7 text-lg leading-9 text-[#0D2744] sm:p-9">
             <p>{homeContent.intro}</p>
-            <p className="mt-4">{homeContent.supportIntro}</p>
-            <ul className="mt-4 grid gap-2">
+            <p className="mt-5">{homeContent.supportIntro}</p>
+            <ul className="mt-5 grid gap-2">
               {homeContent.supportTopics.map((topic) => (
                 <li className="flex gap-3" key={topic}>
-                  <span aria-hidden="true" className="text-[#53728A]">
+                  <span aria-hidden="true" className="text-[#FF929A]">
                     •
                   </span>
                   <span>{topic}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-4">{homeContent.principle}</p>
-          </SectionTitle>
-
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Link
-              className="rounded-[2rem] bg-[#F4F8FB] p-7 shadow-[0_18px_48px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
-              href="/diagnostik"
-            >
-              <h3 className="text-2xl font-semibold text-[#0D2744]">
-                {homeContent.diagnosticsTitle}
-              </h3>
-              <p className="mt-4 leading-7 text-[#53728A]">
-                {homeContent.diagnosticsText}
-              </p>
-              <p className="mt-6 text-sm font-semibold text-[#53728A]">
-                Mehr zur Diagnostik -&gt;
-              </p>
-            </Link>
-            <Link
-              className="rounded-[2rem] bg-[#F4F8FB] p-7 shadow-[0_18px_48px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
-              href="/praxis"
-            >
-              <h3 className="text-2xl font-semibold text-[#0D2744]">
-                {homeContent.settingTitle}
-              </h3>
-              <ul className="mt-4 grid gap-2 leading-7 text-[#53728A]">
-                {homeContent.settingItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="mt-6 text-sm font-semibold text-[#53728A]">
-                Zur Praxis -&gt;
-              </p>
-            </Link>
+            <p className="mt-5 text-[#53728A]">{homeContent.principle}</p>
           </div>
         </div>
       </section>
 
       <section className="bg-[#F4F8FB] px-5 py-24 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
-            <SectionTitle
-              eyebrow="Themen und Schwerpunkte"
-              title={homeContent.supportIntro}
-            >
-              <p>{homeContent.closing}</p>
-            </SectionTitle>
-            <div className="mt-8 grid max-w-4xl gap-4 sm:grid-cols-2">
-              {supportTopics.map((topic, index) => (
-                <Link
-                  className={`group flex min-h-16 items-center gap-4 rounded-2xl border px-5 py-4 text-base font-semibold leading-snug text-[#0D2744] shadow-[0_16px_34px_rgba(20,54,59,0.08)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_46px_rgba(20,54,59,0.13)] ${topicPills[index % topicPills.length].card}`}
-                  href="/themen"
-                  key={topic}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${topicPills[index % topicPills.length].dot}`}
-                  />
-                  <span>{topic}</span>
-                  <span
-                    aria-hidden="true"
-                    className="ml-auto shrink-0 text-[#53728A] opacity-45 transition group-hover:translate-x-1 group-hover:opacity-100"
-                  >
-                    →
-                  </span>
-                </Link>
-              ))}
-            </div>
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-5 lg:grid-cols-3">
+            {quickLinks.map((item) => (
+              <Link
+                className={`${item.color} group flex min-h-64 flex-col justify-between rounded-lg p-7 text-white shadow-[0_20px_50px_rgba(13,39,68,0.16)] transition hover:-translate-y-1`}
+                href={item.href}
+                key={item.title}
+              >
+                <div>
+                  <h2 className="text-3xl font-semibold">{item.title}</h2>
+                  <p className="mt-5 leading-8 text-white/82">{item.text}</p>
+                </div>
+                <p className="mt-8 text-sm font-semibold text-[#FF929A] transition group-hover:translate-x-1">
+                  Mehr erfahren -&gt;
+                </p>
+              </Link>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] shadow-[0_24px_64px_rgba(20,54,59,0.12)]">
+      <section className="bg-white px-5 py-24 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#B9CFDD] shadow-[0_22px_55px_rgba(13,39,68,0.14)]">
             <Image
               src="/images/praxis2.png"
               alt="Sitzbereich der Praxis mit hellen Fenstern"
@@ -198,72 +181,83 @@ export default function Home() {
               className="object-cover"
             />
           </div>
-        </div>
-      </section>
-
-      <section className="bg-[#FFFFFF] px-5 py-24 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <SectionTitle
-            eyebrow="Überblick"
-            title="Mehr Informationen auf kurzen Detailseiten."
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            <SoftCard title="Ablauf & Kosten" href="/ablauf-kosten">
-              Erstgespräch, reguläre Einheit, Kostenzuschuss und
-              Verschwiegenheit.
-            </SoftCard>
-            <SoftCard title="Praxis" href="/praxis">
-              Adresse, Anfahrt, Hinweise zum Termin und Einblicke in die Räume.
-            </SoftCard>
-            <SoftCard title="FAQs" href="/faqs">
-              Antworten auf häufige Fragen zu Erstgespräch, Kosten und
-              Diagnostik.
-            </SoftCard>
-            <SoftCard title="Kontakt" href="/kontakt">
-              E-Mail, Telefon, WhatsApp und Informationen zur Erreichbarkeit.
-            </SoftCard>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
+              Themen und Schwerpunkte
+            </p>
+            <h2 className="mt-4 text-4xl font-semibold leading-tight text-[#0D2744] sm:text-5xl">
+              {homeContent.supportIntro}
+            </h2>
+            <div className="mt-8 grid gap-3">
+              {supportTopics.map((topic, index) => (
+                <Link
+                  className="group grid grid-cols-[14px_1fr_auto] items-center gap-4 rounded-lg border border-[#B9CFDD] bg-white px-5 py-4 text-base font-semibold text-[#0D2744] shadow-[0_12px_28px_rgba(13,39,68,0.07)] transition hover:border-[#FF929A] hover:bg-[#B9CFDD]/40"
+                  href="/themen"
+                  key={topic}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={
+                      index % 2 === 0
+                        ? "h-3.5 w-3.5 rounded-full bg-[#FF929A]"
+                        : "h-3.5 w-3.5 rounded-full bg-[#53728A]"
+                    }
+                  />
+                  <span>{topic}</span>
+                  <span
+                    aria-hidden="true"
+                    className="text-[#53728A] transition group-hover:translate-x-1"
+                  >
+                    -&gt;
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+      <section className="bg-[#0D2744] px-5 py-20 text-white sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#FF929A]">
               Kontakt
             </p>
-            <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
+            <h2 className="mt-4 text-4xl font-semibold">
               Erstgespräch vereinbaren
             </h2>
+            <p className="mt-5 max-w-xl leading-8 text-[#B9CFDD]">
+              {homeContent.closing}
+            </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             <a
               aria-label={`E-Mail an ${contact.email} schreiben`}
-              className="rounded-3xl bg-white p-6 shadow-[0_16px_42px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
+              className="rounded-lg bg-[#53728A] p-6 transition hover:bg-[#7691AD]"
               href={`mailto:${contact.email}`}
             >
-              <span className="text-sm uppercase tracking-[0.18em] text-[#7691AD]">
+              <span className="text-sm uppercase tracking-[0.18em] text-[#B9CFDD]">
                 E-Mail
               </span>
-              <span className="mt-2 block font-semibold">{contact.email}</span>
+              <span className="mt-3 block font-semibold">{contact.email}</span>
             </a>
             <a
               aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
-              className="rounded-3xl bg-white p-6 shadow-[0_16px_42px_rgba(20,54,59,0.08)] transition hover:-translate-y-1"
+              className="rounded-lg bg-[#7691AD] p-6 text-[#0D2744] transition hover:bg-[#B9CFDD]"
               href={`tel:${contact.phone.replaceAll(" ", "")}`}
             >
-              <span className="text-sm uppercase tracking-[0.18em] text-[#7691AD]">
+              <span className="text-sm uppercase tracking-[0.18em]">
                 Telefon
               </span>
-              <span className="mt-2 block font-semibold">{contact.phone}</span>
+              <span className="mt-3 block font-semibold">{contact.phone}</span>
             </a>
             <Link
-              className="rounded-3xl bg-[#FF929A] p-6 font-semibold text-[#0D2744] shadow-[0_16px_42px_rgba(255,146,154,0.2)] transition hover:-translate-y-1"
+              className="rounded-lg bg-[#FF929A] p-6 font-semibold text-[#0D2744] shadow-[0_18px_40px_rgba(255,146,154,0.26)] transition hover:bg-[#ff7f8a]"
               href="/kontakt#online-buchung"
             >
               {homeContent.button}
-              <span className="mt-2 block text-sm text-white/72">
-                Kostenloses Erstgespräch vereinbaren
+              <span className="mt-3 block text-sm text-[#0D2744]/72">
+                Online-Buchung
               </span>
             </Link>
           </div>

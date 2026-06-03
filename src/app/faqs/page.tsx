@@ -16,7 +16,7 @@ export default function FAQsPage() {
       <PageHero eyebrow="FAQ" title={faqIntro} />
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-4xl rounded-[2.5rem] bg-[#F4F8FB] p-5 sm:p-8">
+        <div className="mx-auto max-w-4xl rounded-lg border border-[#B9CFDD] border-l-[10px] border-l-[#FF929A] bg-[#F4F8FB] p-5 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-8">
           {faqItems.map((item) => (
             <details
               className="group border-b border-[#B9CFDD] py-5 last:border-b-0"

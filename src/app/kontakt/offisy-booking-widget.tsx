@@ -153,7 +153,7 @@ export function OffisyBookingWidget() {
   }, []);
 
   return (
-    <div className="min-h-[520px] rounded-[2rem] border border-[#B9CFDD] bg-white p-3 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-5">
+    <div className="min-h-[520px] rounded-lg border border-[#B9CFDD] bg-white p-3 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-5">
       <div id="offisyCalendar" ref={calendarRef} />
       {status === "loading" ? (
         <p className="p-6 text-center text-sm font-medium text-[#53728A]">

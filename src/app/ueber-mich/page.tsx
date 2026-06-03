@@ -22,7 +22,7 @@ export default function UeberMichPage() {
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-[#F4F8FB]">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-[#B9CFDD] shadow-[0_22px_55px_rgba(13,39,68,0.14)]">
             <Image
               src="/images/maria.png"
               alt="Maria Chamarina"
@@ -33,7 +33,7 @@ export default function UeberMichPage() {
             />
           </div>
 
-          <div className="text-lg leading-9 text-[#53728A]">
+          <div className="rounded-lg border-l-[10px] border-[#FF929A] bg-[#F4F8FB] p-7 text-lg leading-9 text-[#53728A] sm:p-9">
             {aboutContent.workParagraphs.slice(1).map((paragraph) => (
               <p className="mt-5 first:mt-0" key={paragraph}>
                 {paragraph}
@@ -46,7 +46,7 @@ export default function UeberMichPage() {
         </div>
       </section>
 
-      <section className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
             Erfahrung
@@ -57,7 +57,7 @@ export default function UeberMichPage() {
           <div className="mt-10 grid gap-4">
             {educationItems.map((item) => (
               <div
-                className="rounded-[1.75rem] bg-white p-6"
+                className="rounded-lg border border-[#B9CFDD] bg-white p-6 shadow-[0_12px_30px_rgba(13,39,68,0.06)]"
                 key={item}
               >
                 <p className="leading-7 text-[#53728A]">{item}</p>

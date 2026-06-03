@@ -62,7 +62,7 @@ export default function KontaktPage() {
       </section>
 
       <section
-        className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10"
+        className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10"
         id="online-buchung"
       >
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
@@ -82,17 +82,17 @@ export default function KontaktPage() {
         </div>
       </section>
 
-      <section className="bg-[#FFFFFF] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#0D2744] px-5 py-20 text-white sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#FF929A]">
               Praxis
             </p>
-            <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
+            <h2 className="mt-4 text-4xl font-semibold text-white">
               {practiceContent.address}
             </h2>
           </div>
-          <p className="text-lg leading-8 text-[#53728A]">
+          <p className="text-lg leading-8 text-[#B9CFDD]">
             {practiceContent.addressText} Öffentlich erreichbar über U1 / U3
             Stephansplatz, U4 Schwedenplatz sowie Straßenbahn und Bus in
             Gehweite.
