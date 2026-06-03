@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { PageHero, SoftCard } from "../components";
 import { contact, contactContent, practiceContent } from "../content";
 import { createPageMetadata } from "../seo";
+import { OffisyBookingWidget } from "./offisy-booking-widget";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Kontakt",
@@ -65,18 +65,6 @@ export default function KontaktPage() {
         className="bg-[#F4F8FB] px-5 py-20 sm:px-8 lg:px-10"
         id="online-buchung"
       >
-        <Script
-          id="offisy-config"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html:
-              'window.offisy = window.offisy || {}; window.offisy.apiKey = "60f36d12-789b-4af5-8f68-ddb1cb390d11";',
-          }}
-        />
-        <Script
-          src="https://buchen.offisy.at/api/booking/v1/app.js"
-          strategy="afterInteractive"
-        />
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
@@ -90,9 +78,7 @@ export default function KontaktPage() {
               Erstgespräch aus.
             </p>
           </div>
-          <div className="min-h-[520px] rounded-[2rem] border border-[#B9CFDD] bg-white p-3 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-5">
-            <div id="offisyCalendar" />
-          </div>
+          <OffisyBookingWidget />
         </div>
       </section>
 
