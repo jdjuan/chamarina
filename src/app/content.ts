@@ -22,7 +22,7 @@ export const homeContent = {
   title: "Klinisch-psychologische Behandlung & Diagnostik in Wien",
   subtitle:
     "Unterstützung bei Angst, Zwang, Depression, Beziehungsthemen, Sexualität und anderen psychischen Belastungen.",
-  button: "Termin buchen",
+  button: "kostenloses Erstgespräch",
   welcomeTitle: "Schön, dass Sie hier sind!",
   intro:
     "Ich bin klinische Psychologin und biete psychologische Therapie sowie diagnostische Abklärung für Erwachsene in Wien an.",
@@ -40,7 +40,7 @@ export const homeContent = {
   diagnosticsText:
     "Zeitnahe diagnostische Abklärung und klinisch-psychologische Diagnostik für Erwachsene.",
   settingTitle: "Praxis und Setting",
-  settingItems: ["Wien, 1. Bezirk", "online oder vor Ort", "120 € pro Einheit"],
+  settingItems: ["Wien, 1. Bezirk", "online oder vor Ort"],
   closing:
     "Wenn Sie das Gefühl haben, dass ein Gespräch hilfreich sein könnte, können Sie gerne ein kostenloses Erstgespräch vereinbaren.",
 };
@@ -60,13 +60,14 @@ export const aboutContent = {
 };
 
 export const educationItems = [
+  "Studium der Ostasienwissenschaften und Germanistik an der Ruprecht-Karls-Universität in Heidelberg, Deutschland",
   "Studium der Psychologie an der Universität Wien, Schwerpunkt Klinisch- und Gesundheitspsychologie",
-  "Studium der Ostasienwissenschaften und Germanistik an der Ruprecht-Karls-Universität in Heidelberg, Deutschland.",
+  "Mitarbeit bei der Österreichischen Autistenhilfe während des Studiums",
+  "Forschungsmitarbeit an der Universität Wien im Stress-Lab während des Studiums",
   "Ausbildung klinische Psychologie (Wiener Akademie für klinische Psychologie)",
   "Ausbildung Sexualtherapie (Österreichische Gesellschaft für Sexualwissenschaften)",
   "Seit 2022 angestellt bei Phobius Phobiezentrum Wien",
-  "Mitarbeit bei der Österreichischen Autistenhilfe",
-  "Forschungsmitarbeit an der Universität Wien im Stress-Lab",
+  "Seit 2026 selbstständig in eigener Praxis",
 ];
 
 export const focusAreas = [
@@ -148,27 +149,35 @@ export const diagnosticsContent = {
   flowTitle: "Ablauf",
   steps: [
     {
-      title:
-        "Kostenloses Erstgespräch (auch online oder telefonisch möglich), ca. 20-30 Minuten",
-    },
-    { title: "Screening" },
-    {
-      title: "Termin in der Praxis (ca. 2,5 Stunden)",
-      items: [
-        "ausführliches Gespräch",
-        "klinisch-psychologische Testverfahren, z. B. Fragebögen",
+      title: "Kostenloses Vorgespräch (per Video-Call oder telefonisch)",
+      paragraphs: [
+        "In einem unverbindlichen Vorgespräch lernen wir uns kennen und besprechen Ihr Anliegen. Dabei klären wir gemeinsam, welche Fragestellung untersucht werden soll und ob eine klinisch-psychologische Diagnostik für Ihr Anliegen sinnvoll ist. Zudem erhalten Sie Informationen zum weiteren Ablauf.",
       ],
     },
     {
-      title: "Rückmeldung, Einordnung und Besprechung der Ergebnisse",
-      items: [
-        "Aushändigung des Befundes bzw. Gutachtens",
-        "bei Bedarf Therapieempfehlung oder Weitervermittlung",
+      title: "Anmelde- und Screeningbogen (online)",
+      paragraphs: [
+        "Vor dem Diagnostiktermin erhalten Sie einen Anmelde- und Screeningbogen, den Sie bequem zu Hause ausfüllen können. Dieser erfasst wichtige Informationen zu Ihrer aktuellen Symptomatik, bisherigen Diagnosen, Vorbehandlungen und Medikation. Zudem werden verschiedene psychische Beschwerdebereiche mittels kurzer Screeningfragen erhoben. Dies ermöglicht eine gezielte Vorbereitung der Diagnostik.",
+      ],
+    },
+    {
+      title: "Diagnostiktermin (in der Praxis)",
+      paragraphs: [
+        "Der Diagnostiktermin dauert in der Regel etwa 2,5 Stunden. Er umfasst ein klinisch-psychologisches Explorationsgespräch sowie die Durchführung individuell ausgewählter psychologischer Testverfahren. Die Auswahl der Verfahren richtet sich nach Ihrer Fragestellung und den Ergebnissen des Vorgesprächs und Screeningbogens.",
+      ],
+    },
+    {
+      title: "Befund und Rückmeldung (persönlich oder per Video-Call)",
+      paragraphs: [
+        "Nach Auswertung aller Informationen erhalten Sie ein schriftliches klinisch-psychologisches Gutachten. In einem Rückmeldegespräch werden die Ergebnisse verständlich erläutert, offene Fragen besprochen und bei Bedarf Empfehlungen für weitere Schritte gegeben.",
       ],
     },
   ],
   note:
     "In manchen Fällen kann für eine umfassende diagnostische Abklärung ein weiterer Termin sinnvoll oder notwendig sein.",
+  confidentialityTitle: "Vertraulichkeit",
+  confidentiality:
+    "Ihre Angaben werden selbstverständlich vertraulich behandelt und unterliegen der gesetzlichen Verschwiegenheitspflicht klinischer Psycholog:innen.",
   costTitle: "Kosten",
   cost:
     "Die Kosten für eine klinisch-psychologische Diagnostik inklusive Befund/Gutachten betragen 500 €.",

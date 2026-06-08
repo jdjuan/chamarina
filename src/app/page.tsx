@@ -35,7 +35,7 @@ const quickLinks = [
   },
   {
     title: "Ablauf & Kosten",
-    text: "Kostenloses Erstgespräch, klare Rahmenbedingungen und 120 € pro Einheit.",
+    text: "Kostenloses Erstgespräch und klare Rahmenbedingungen für Behandlung und Diagnostik.",
     href: "/ablauf-kosten",
     color: "bg-[#0D2744]",
   },
@@ -72,7 +72,7 @@ export default function Home() {
                 />
               </div>
               <p className="text-sm font-semibold leading-6 text-[#E8F1F6]">
-                Wien, 1. Bezirk · online oder vor Ort · 120 € pro Einheit
+                Wien, 1. Bezirk · online oder vor Ort
               </p>
             </div>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -105,7 +105,7 @@ export default function Home() {
                   className="object-cover object-top"
                 />
               </div>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {homeContent.settingItems.map((item) => (
                   <p
                     className="rounded-lg bg-[#B9CFDD] px-4 py-3 text-sm font-semibold text-[#0D2744]"

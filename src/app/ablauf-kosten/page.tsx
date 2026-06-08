@@ -3,6 +3,8 @@ import { CTA, PageHero, SoftCard } from "../components";
 import { practiceContent, processContent } from "../content";
 import { createPageMetadata } from "../seo";
 
+const processStepTones = ["rose", "blue", "green"] as const;
+
 export const metadata: Metadata = createPageMetadata({
   title: "Ablauf & Kosten",
   description:
@@ -27,7 +29,11 @@ export default function AblaufKostenPage() {
           </p>
           <div className="mt-8 grid gap-5 lg:grid-cols-3">
             {processContent.steps.map((step, index) => (
-              <SoftCard title={step.title} key={step.title}>
+              <SoftCard
+                title={step.title}
+                tone={processStepTones[index % processStepTones.length]}
+                key={step.title}
+              >
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#53728A]">
                   Schritt {index + 1}
                 </p>
@@ -55,7 +61,7 @@ export default function AblaufKostenPage() {
 
       <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
-          <SoftCard title={processContent.costTitle}>
+          <SoftCard title={processContent.costTitle} tone="amber">
             <ul className="grid gap-2">
               {processContent.costs.map((item) => (
                 <li className="text-2xl font-semibold text-[#0D2744]" key={item}>
@@ -64,14 +70,14 @@ export default function AblaufKostenPage() {
               ))}
             </ul>
           </SoftCard>
-          <SoftCard title="Setting">
+          <SoftCard title="Setting" tone="blue">
             <div className="grid gap-3">
               {processContent.costsParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
           </SoftCard>
-          <SoftCard title={processContent.insuranceTitle}>
+          <SoftCard title={processContent.insuranceTitle} tone="green">
             <div className="grid gap-3">
               {processContent.insuranceParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
@@ -83,10 +89,10 @@ export default function AblaufKostenPage() {
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
-          <SoftCard title={processContent.confidentialityTitle}>
+          <SoftCard title={processContent.confidentialityTitle} tone="rose">
             {processContent.confidentiality}
           </SoftCard>
-          <SoftCard title={practiceContent.appointmentTitle}>
+          <SoftCard title={practiceContent.appointmentTitle} tone="blue">
             <div className="grid gap-3">
               {practiceContent.appointmentParagraphs.slice(2).map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

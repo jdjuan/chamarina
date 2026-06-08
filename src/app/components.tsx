@@ -33,7 +33,7 @@ export function Header() {
 
         <nav
           aria-label="Hauptnavigation"
-          className="hidden items-center gap-3 text-[0.78rem] font-medium text-[#0D2744] lg:flex xl:gap-4 xl:text-[0.82rem]"
+          className="hidden items-center gap-3 text-[0.78rem] font-medium text-[#0D2744] xl:flex xl:gap-4 xl:text-[0.82rem]"
         >
           {navItems.map((item) => (
             <Link
@@ -45,14 +45,14 @@ export function Header() {
             </Link>
           ))}
           <Link
-            className="rounded-lg bg-[#FF929A] px-4 py-2.5 font-semibold text-[#0D2744] shadow-[0_12px_26px_rgba(255,146,154,0.28)] transition hover:bg-[#ff7f8a]"
+            className="whitespace-nowrap rounded-lg bg-[#FF929A] px-4 py-2.5 font-semibold text-[#0D2744] shadow-[0_12px_26px_rgba(255,146,154,0.28)] transition hover:bg-[#ff7f8a]"
             href="/kontakt#online-buchung"
           >
-            Termin buchen
+            kostenloses Erstgespräch
           </Link>
         </nav>
 
-        <div className="relative lg:hidden">
+        <div className="relative xl:hidden">
           <button
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Navigation schließen" : "Navigation öffnen"}
@@ -88,7 +88,7 @@ export function Header() {
                   href="/kontakt#online-buchung"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Termin buchen
+                  kostenloses Erstgespräch
                 </Link>
               </nav>
             </div>
@@ -253,17 +253,31 @@ export function CTA({
   );
 }
 
+const softCardTones = {
+  default: "border-[#B9CFDD] border-l-[#FF929A] bg-white",
+  rose: "border-[#F6B0B6] border-l-[#FF929A] bg-[#FFF4F5]",
+  blue: "border-[#B9CFDD] border-l-[#53728A] bg-[#F4F8FB]",
+  green: "border-[#B7D8C7] border-l-[#5D9475] bg-[#F1FAF5]",
+  amber: "border-[#E6C66A] border-l-[#D7A52E] bg-[#FFF9E8]",
+};
+
+type SoftCardTone = keyof typeof softCardTones;
+
 export function SoftCard({
   title,
   children,
   href,
+  tone = "default",
 }: {
   title: string;
   children: ReactNode;
   href?: string;
+  tone?: SoftCardTone;
 }) {
   const content = (
-    <article className="h-full rounded-lg border border-[#B9CFDD] border-l-[8px] border-l-[#FF929A] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_58px_rgba(13,39,68,0.12)]">
+    <article
+      className={`h-full rounded-lg border border-l-[8px] p-7 shadow-[0_18px_48px_rgba(13,39,68,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_58px_rgba(13,39,68,0.12)] ${softCardTones[tone]}`}
+    >
       <h3 className="text-2xl font-semibold text-[#0D2744]">{title}</h3>
       <div className="mt-4 leading-7 text-[#53728A]">{children}</div>
       {href ? (

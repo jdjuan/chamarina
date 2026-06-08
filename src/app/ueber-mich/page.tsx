@@ -16,9 +16,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function UeberMichPage() {
   return (
     <main>
-      <PageHero eyebrow={aboutContent.title} title={aboutContent.workTitle}>
-        <p>{aboutContent.workParagraphs[0]}</p>
-      </PageHero>
+      <PageHero eyebrow={aboutContent.title} title={aboutContent.workTitle} />
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
@@ -34,7 +32,7 @@ export default function UeberMichPage() {
           </div>
 
           <div className="rounded-lg border-l-[10px] border-[#FF929A] bg-[#F4F8FB] p-7 text-lg leading-9 text-[#53728A] sm:p-9">
-            {aboutContent.workParagraphs.slice(1).map((paragraph) => (
+            {aboutContent.workParagraphs.map((paragraph) => (
               <p className="mt-5 first:mt-0" key={paragraph}>
                 {paragraph}
               </p>
@@ -54,16 +52,18 @@ export default function UeberMichPage() {
           <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
             {aboutContent.educationTitle}
           </h2>
-          <div className="mt-10 grid gap-4">
-            {educationItems.map((item) => (
-              <div
-                className="rounded-lg border border-[#B9CFDD] bg-white p-6 shadow-[0_12px_30px_rgba(13,39,68,0.06)]"
-                key={item}
-              >
-                <p className="leading-7 text-[#53728A]">{item}</p>
-              </div>
-            ))}
-          </div>
+          <article className="mt-10 rounded-lg border border-[#B9CFDD] border-l-[10px] border-l-[#FF929A] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-9">
+            <ul className="grid gap-4 text-lg leading-8 text-[#53728A]">
+              {educationItems.map((item) => (
+                <li className="flex gap-3" key={item}>
+                  <span aria-hidden="true" className="text-[#FF929A]">
+                    •
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
         </div>
       </section>
     </main>

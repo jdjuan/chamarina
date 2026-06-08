@@ -3,6 +3,13 @@ import { CTA, PageHero } from "../components";
 import { diagnosticsContent } from "../content";
 import { createPageMetadata } from "../seo";
 
+const diagnosticStepStyles = [
+  "border-[#F6B0B6] bg-[#FFF4F5]",
+  "border-[#B9CFDD] bg-[#F4F8FB]",
+  "border-[#B7D8C7] bg-[#F1FAF5]",
+  "border-[#E6C66A] bg-[#FFF9E8]",
+];
+
 export const metadata: Metadata = createPageMetadata({
   title: "Klinisch-psychologische Diagnostik",
   description:
@@ -60,32 +67,37 @@ export default function DiagnostikPage() {
           <div className="grid gap-4">
             {diagnosticsContent.steps.map((step, index) => (
               <div
-                className="grid gap-4 rounded-lg border border-[#B9CFDD] bg-white p-6 shadow-[0_12px_30px_rgba(13,39,68,0.06)] sm:grid-cols-[64px_1fr]"
+                className={`${diagnosticStepStyles[index % diagnosticStepStyles.length]} rounded-lg border p-6 shadow-[0_12px_30px_rgba(13,39,68,0.06)]`}
                 key={step.title}
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#53728A] font-semibold text-white">
-                  {index + 1}
-                </span>
-                <div className="leading-7 text-[#53728A]">
-                  <p>{step.title}</p>
-                  {step.items ? (
-                    <ul className="mt-3 grid gap-2">
-                      {step.items.map((item) => (
-                        <li className="flex gap-3" key={item}>
-                          <span aria-hidden="true" className="text-[#53728A]">
-                            •
-                          </span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#53728A] font-semibold text-white">
+                    {index + 1}
+                  </span>
+                  <h3 className="pt-1 text-xl font-semibold leading-7 text-[#0D2744]">
+                    {step.title}
+                  </h3>
+                </div>
+                <div className="mt-4 grid gap-3 leading-7 text-[#53728A]">
+                  {step.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
                 </div>
               </div>
             ))}
-            <p className="rounded-lg bg-[#B9CFDD]/35 p-6 leading-7 text-[#53728A]">
-              {diagnosticsContent.note}
-            </p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <p className="rounded-lg bg-[#B9CFDD]/35 p-6 leading-7 text-[#53728A]">
+                {diagnosticsContent.note}
+              </p>
+              <div className="rounded-lg bg-[#0D2744] p-6 text-white">
+                <h3 className="text-xl font-semibold text-white">
+                  {diagnosticsContent.confidentialityTitle}
+                </h3>
+                <p className="mt-3 leading-7 text-[#B9CFDD]">
+                  {diagnosticsContent.confidentiality}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

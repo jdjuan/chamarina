@@ -24,7 +24,7 @@ export default function KontaktPage() {
             aria-label={`E-Mail an ${contact.email} schreiben`}
             href={`mailto:${contact.email}`}
           >
-            <SoftCard title="E-Mail">
+            <SoftCard title="E-Mail" tone="rose">
               <p>Schreiben Sie mir gerne per E-Mail.</p>
               <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contact.email}
@@ -37,7 +37,7 @@ export default function KontaktPage() {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <SoftCard title="WhatsApp">
+            <SoftCard title="WhatsApp" tone="green">
               <p>Kurze Terminfragen können Sie auch per WhatsApp stellen.</p>
               <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contact.phone}
@@ -48,7 +48,7 @@ export default function KontaktPage() {
             aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
             href={`tel:${contact.phone.replaceAll(" ", "")}`}
           >
-            <SoftCard title="Telefon">
+            <SoftCard title="Telefon" tone="blue">
               <p>
                 Sollten Sie mich nicht erreichen, melde ich mich umgehend
                 zurück.

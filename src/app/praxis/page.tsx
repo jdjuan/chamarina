@@ -22,7 +22,7 @@ export default function PraxisPage() {
       <section className="px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="grid gap-5">
-            <SoftCard title={practiceContent.addressTitle}>
+            <SoftCard title={practiceContent.addressTitle} tone="rose">
               <p className="text-2xl font-semibold text-[#0D2744]">
                 {practiceContent.address}
               </p>
@@ -37,7 +37,7 @@ export default function PraxisPage() {
                 Route öffnen -&gt;
               </a>
             </SoftCard>
-            <SoftCard title={practiceContent.directionsTitle}>
+            <SoftCard title={practiceContent.directionsTitle} tone="blue">
               <p className="font-semibold text-[#0D2744]">
                 {practiceContent.publicTitle}
               </p>
@@ -89,7 +89,7 @@ export default function PraxisPage() {
 
       <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <SoftCard title={practiceContent.appointmentTitle}>
+          <SoftCard title={practiceContent.appointmentTitle} tone="green">
             <div className="grid gap-3">
               {practiceContent.appointmentParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
