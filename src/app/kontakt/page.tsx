@@ -1,20 +1,45 @@
 import type { Metadata } from "next";
 import { PageHero, SoftCard } from "../components";
-import { contact, contactContent, practiceContent } from "../content";
 import { createPageMetadata } from "../seo";
 import { OffisyBookingWidget } from "./offisy-booking-widget";
+import {
+  getContactPage,
+  getPracticePage,
+  getSiteSettings,
+} from "../../sanity/content";
+import { imageAlt, imageUrl } from "../../sanity/image";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Kontakt",
-  description:
-    "Kontakt zur Praxis Chamarina in Wien: Termin anfragen per E-Mail, Telefon oder WhatsApp.",
-  path: "/kontakt",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const [contactContent, settings] = await Promise.all([
+    getContactPage(),
+    getSiteSettings(),
+  ]);
 
-export default function KontaktPage() {
+  return createPageMetadata({
+    title: contactContent.seo?.title || "Kontakt",
+    description:
+      contactContent.seo?.description ||
+      "Kontakt zur Praxis Chamarina in Wien: Termin anfragen per E-Mail, Telefon oder WhatsApp.",
+    path: "/kontakt",
+    image: imageUrl(contactContent.seo?.image, "/images/praxis4.jpg"),
+    imageAlt:
+      contactContent.seo?.imageAlt ||
+      imageAlt(contactContent.seo?.image, "Praxisraum der Praxis Chamarina in Wien"),
+    metadataSiteName: settings.siteName,
+  });
+}
+
+export default async function KontaktPage() {
+  const [settings, contactContent, practiceContent] = await Promise.all([
+    getSiteSettings(),
+    getContactPage(),
+    getPracticePage(),
+  ]);
+  const { contact } = settings;
+
   return (
     <main>
-      <PageHero eyebrow="Erreichbarkeit" title={contactContent.title}>
+      <PageHero eyebrow={contactContent.heroEyebrow} title={contactContent.title}>
         <p>{contactContent.phoneIntro}</p>
       </PageHero>
 
@@ -24,8 +49,8 @@ export default function KontaktPage() {
             aria-label={`E-Mail an ${contact.email} schreiben`}
             href={`mailto:${contact.email}`}
           >
-            <SoftCard title="E-Mail" tone="rose">
-              <p>Schreiben Sie mir gerne per E-Mail.</p>
+            <SoftCard title={contactContent.mail} tone="rose">
+              <p>{contactContent.emailCardText}</p>
               <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contact.email}
               </p>
@@ -37,8 +62,8 @@ export default function KontaktPage() {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <SoftCard title="WhatsApp" tone="mist">
-              <p>Kurze Terminfragen können Sie auch per WhatsApp stellen.</p>
+            <SoftCard title={contactContent.whatsapp} tone="mist">
+              <p>{contactContent.whatsappCardText}</p>
               <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contact.phone}
               </p>
@@ -48,13 +73,10 @@ export default function KontaktPage() {
             aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
             href={`tel:${contact.phone.replaceAll(" ", "")}`}
           >
-            <SoftCard title="Telefon" tone="blue">
-              <p>
-                Sollten Sie mich nicht erreichen, melde ich mich umgehend
-                zurück.
-              </p>
+            <SoftCard title={contactContent.phone} tone="blue">
+              <p>{contactContent.phoneCardText}</p>
               <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
-                {contactContent.phone}
+                {contact.phone}
               </p>
             </SoftCard>
           </a>
@@ -68,17 +90,19 @@ export default function KontaktPage() {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
-              Online-Buchung
+              {contactContent.bookingEyebrow}
             </p>
             <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
-              Termin buchen
+              {contactContent.bookingTitle}
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#53728A]">
-              Wählen Sie hier direkt einen freien Termin für ein kostenloses
-              Erstgespräch aus.
+              {contactContent.bookingText}
             </p>
           </div>
-          <OffisyBookingWidget />
+          <OffisyBookingWidget
+            contactEmail={contact.email}
+            widget={contactContent.bookingWidget}
+          />
         </div>
       </section>
 
@@ -86,16 +110,14 @@ export default function KontaktPage() {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#FF929A]">
-              Praxis
+              {contactContent.addressEyebrow}
             </p>
             <h2 className="mt-4 text-4xl font-semibold text-white">
               {practiceContent.address}
             </h2>
           </div>
           <p className="text-lg leading-8 text-[#B9CFDD]">
-            {practiceContent.addressText} Öffentlich erreichbar über U1 / U3
-            Stephansplatz, U4 Schwedenplatz sowie Straßenbahn und Bus in
-            Gehweite.
+            {practiceContent.addressText} {contactContent.addressSummary}
           </p>
         </div>
       </section>

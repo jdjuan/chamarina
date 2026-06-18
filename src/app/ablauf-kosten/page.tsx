@@ -1,22 +1,46 @@
 import type { Metadata } from "next";
 import { CTA, PageHero, SoftCard } from "../components";
-import { practiceContent, processContent } from "../content";
 import { createPageMetadata } from "../seo";
+import {
+  getPracticePage,
+  getProcessPage,
+  getSiteSettings,
+} from "../../sanity/content";
+import { imageAlt, imageUrl } from "../../sanity/image";
 
 const processStepTones = ["rose", "blue", "mist"] as const;
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Ablauf & Kosten",
-  description:
-    "Informationen zu kostenlosem Erstgespräch, Ablauf der psychologischen Behandlung, Kosten, Verschwiegenheit und Krankenkasse.",
-  path: "/ablauf-kosten",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const [processContent, settings] = await Promise.all([
+    getProcessPage(),
+    getSiteSettings(),
+  ]);
 
-export default function AblaufKostenPage() {
+  return createPageMetadata({
+    title: processContent.seo?.title || "Ablauf & Kosten",
+    description:
+      processContent.seo?.description ||
+      "Informationen zu kostenlosem Erstgespräch, Ablauf der psychologischen Behandlung, Kosten, Verschwiegenheit und Krankenkasse.",
+    path: "/ablauf-kosten",
+    image: imageUrl(processContent.seo?.image, "/images/praxis4.jpg"),
+    imageAlt:
+      processContent.seo?.imageAlt ||
+      imageAlt(processContent.seo?.image, "Praxisraum der Praxis Chamarina in Wien"),
+    metadataSiteName: settings.siteName,
+  });
+}
+
+export default async function AblaufKostenPage() {
+  const [processContent, practiceContent, settings] = await Promise.all([
+    getProcessPage(),
+    getPracticePage(),
+    getSiteSettings(),
+  ]);
+
   return (
     <main>
       <PageHero
-        eyebrow="Erstgespräch, Kosten & Rahmen"
+        eyebrow={processContent.heroEyebrow}
         title={processContent.title}
       >
         <p>{processContent.steps[0].paragraphs[0]}</p>
@@ -35,7 +59,7 @@ export default function AblaufKostenPage() {
                 key={step.title}
               >
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#53728A]">
-                  Schritt {index + 1}
+                  {settings.ui.stepLabel} {index + 1}
                 </p>
                 <div className="grid gap-3">
                   {step.paragraphs.map((paragraph) => (
@@ -70,7 +94,7 @@ export default function AblaufKostenPage() {
               ))}
             </ul>
           </SoftCard>
-          <SoftCard title="Setting" tone="blue">
+          <SoftCard title={processContent.settingTitle} tone="blue">
             <div className="grid gap-3">
               {processContent.costsParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
@@ -103,9 +127,9 @@ export default function AblaufKostenPage() {
         <div className="mx-auto mt-10 max-w-7xl rounded-lg bg-[#0D2744] p-8 text-white sm:p-10">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="max-w-2xl text-3xl font-semibold">
-              Kostenloses Erstgespräch vereinbaren
+              {processContent.ctaTitle}
             </h2>
-            <CTA href="/kontakt#online-buchung">Termin buchen</CTA>
+            <CTA href="/kontakt#online-buchung">{processContent.ctaLabel}</CTA>
           </div>
         </div>
       </section>

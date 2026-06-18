@@ -1,20 +1,41 @@
 import type { Metadata } from "next";
 import { PageHero } from "../components";
-import { contact, impressumContent, privacyContent, siteUrl } from "../content";
 import { createPageMetadata } from "../seo";
+import { getLegalPage, getSiteSettings } from "../../sanity/content";
+import { imageAlt, imageUrl } from "../../sanity/image";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Impressum",
-  description:
-    "Impressum und rechtliche Angaben zur Praxis Chamarina, klinische Psychologie in Wien.",
-  path: "/impressum",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const [legalContent, settings] = await Promise.all([
+    getLegalPage(),
+    getSiteSettings(),
+  ]);
 
-export default function ImpressumPage() {
+  return createPageMetadata({
+    title: legalContent.seo?.title || "Impressum",
+    description:
+      legalContent.seo?.description ||
+      "Impressum und rechtliche Angaben zur Praxis Chamarina, klinische Psychologie in Wien.",
+    path: "/impressum",
+    image: imageUrl(legalContent.seo?.image, "/images/praxis4.jpg"),
+    imageAlt:
+      legalContent.seo?.imageAlt ||
+      imageAlt(legalContent.seo?.image, "Praxisraum der Praxis Chamarina in Wien"),
+    metadataSiteName: settings.siteName,
+  });
+}
+
+export default async function ImpressumPage() {
+  const [settings, legalContent] = await Promise.all([
+    getSiteSettings(),
+    getLegalPage(),
+  ]);
+  const { contact } = settings;
+  const { impressum, privacy } = legalContent;
+
   return (
     <main>
-      <PageHero eyebrow="Rechtliches" title={impressumContent.title}>
-        <p>{impressumContent.subtitle}</p>
+      <PageHero eyebrow={impressum.eyebrow} title={impressum.title}>
+        <p>{impressum.subtitle}</p>
       </PageHero>
 
       <section className="px-5 py-20 sm:px-8 lg:px-10">
@@ -22,10 +43,10 @@ export default function ImpressumPage() {
           <div className="grid gap-10 break-words">
             <section>
               <h2 className="text-2xl font-semibold text-[#0D2744]">
-                Medieninhaberin und Verantwortliche
+                {impressum.ownerTitle}
               </h2>
               <div className="mt-4 leading-8 text-[#53728A]">
-                {impressumContent.owner.map((line) => (
+                {impressum.owner.map((line) => (
                   <p key={line}>{line}</p>
                 ))}
               </div>
@@ -33,10 +54,10 @@ export default function ImpressumPage() {
 
             <section>
               <h2 className="text-2xl font-semibold text-[#0D2744]">
-                Kontakt
+                {impressum.contactTitle}
               </h2>
               <p className="mt-4 leading-8 text-[#53728A]">
-                E-Mail:{" "}
+                {settings.ui.emailLabel}:{" "}
                 <a
                   aria-label={`E-Mail an ${contact.email} schreiben`}
                   className="text-[#53728A]"
@@ -45,7 +66,7 @@ export default function ImpressumPage() {
                   {contact.email}
                 </a>
                 <br />
-                Telefon:{" "}
+                {settings.ui.phoneLabel}:{" "}
                 <a
                   aria-label={`Praxis Chamarina telefonisch unter ${contact.phone} kontaktieren`}
                   className="text-[#53728A]"
@@ -54,11 +75,11 @@ export default function ImpressumPage() {
                   {contact.phone}
                 </a>
                 <br />
-                Website: {siteUrl}
+                {settings.ui.websiteLabel}: {settings.siteUrl}
               </p>
             </section>
 
-            {impressumContent.sections.map((section) => (
+            {impressum.sections.map((section) => (
               <section key={section.title}>
                 <h2 className="text-2xl font-semibold text-[#0D2744]">
                   {section.title}
@@ -77,10 +98,10 @@ export default function ImpressumPage() {
       <section className="bg-[#B9CFDD]/35 px-5 py-24 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-4xl">
           <h2 className="break-words text-3xl font-semibold text-[#0D2744] sm:text-4xl">
-            {privacyContent.title}
+            {privacy.title}
           </h2>
           <div className="mt-8 grid gap-5">
-            {privacyContent.sections.map((section) => (
+            {privacy.sections.map((section) => (
               <section
                 className="rounded-lg border border-[#B9CFDD] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.07)] break-words"
                 key={section.title}

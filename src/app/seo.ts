@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import {
-  contact,
-  focusAreas,
-  homeContent,
-  practiceContent,
-  topicDetails,
-} from "./content";
+  fallbackHomePage,
+  fallbackPracticePage,
+  fallbackSiteSettings,
+  fallbackTopicsPage,
+} from "../sanity/fallbacks";
+import { imageUrl } from "../sanity/image";
+import type { HomePageContent, PracticePageContent, SiteSettings, TopicsPageContent } from "../sanity/types";
 
-export const siteName = "Praxis Chamarina";
+export const siteName = fallbackSiteSettings.siteName;
 export const baseUrl = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.psychologie-chamarina.at"
 ).replace(/\/$/, "");
 
-export const defaultDescription =
-  "Klinisch-psychologische Behandlung und Diagnostik für Erwachsene in Wien. Unterstützung bei Angst, Zwang, Depression, Beziehungsthemen und Sexualität.";
+export const defaultDescription = fallbackSiteSettings.defaultDescription;
 
 export function absoluteUrl(path = "/") {
   return new URL(path, baseUrl).toString();
@@ -23,16 +23,18 @@ export function createPageMetadata({
   title,
   description,
   path,
-  image = "/images/praxis2.png",
-  imageAlt = "Helle Praxisräume der Praxis Chamarina in Wien",
+  image = "/images/praxis4.jpg",
+  imageAlt = "Praxisraum der Praxis Chamarina in Wien",
+  metadataSiteName = siteName,
 }: {
   title: string;
   description: string;
   path: string;
   image?: string;
   imageAlt?: string;
+  metadataSiteName?: string;
 }): Metadata {
-  const fullTitle = `${title} | ${siteName}`;
+  const fullTitle = `${title} | ${metadataSiteName}`;
 
   return {
     title,
@@ -44,7 +46,7 @@ export function createPageMetadata({
       title: fullTitle,
       description,
       url: path,
-      siteName,
+      siteName: metadataSiteName,
       locale: "de_AT",
       type: "website",
       images: [
@@ -76,6 +78,82 @@ export function createPageMetadata({
   };
 }
 
+export function createWebsiteJsonLd(settings: SiteSettings) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${baseUrl}/#website`,
+    name: settings.siteName,
+    url: baseUrl,
+    inLanguage: "de-AT",
+    publisher: {
+      "@id": `${baseUrl}/#practice`,
+    },
+  };
+}
+
+export function createPracticeJsonLd({
+  settings,
+  home,
+  practice,
+  topics,
+}: {
+  settings: SiteSettings;
+  home: HomePageContent;
+  practice: PracticePageContent;
+  topics: TopicsPageContent;
+}) {
+  const structuredData = settings.structuredData;
+  const topicNames = topics.focusAreas.flatMap((area) => [
+    area.navTitle || area.title,
+    ...area.topics.map((topic) => topic.title),
+  ]);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "MedicalBusiness"],
+    "@id": `${baseUrl}/#practice`,
+    name: settings.siteName,
+    description: settings.defaultDescription,
+    url: baseUrl,
+    logo: absoluteUrl(imageUrl(settings.logo, "/images/logo.png")),
+    image: [
+      absoluteUrl(imageUrl(home.heroImage, "/images/maria.png")),
+      absoluteUrl(imageUrl(practice.images[0], "/images/praxis4.jpg")),
+    ],
+    email: settings.contact.email,
+    telephone: settings.contact.phone,
+    priceRange: structuredData.priceRange,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: practice.address,
+      addressLocality: structuredData.addressLocality,
+      addressRegion: structuredData.addressRegion,
+      postalCode: structuredData.postalCode,
+      addressCountry: structuredData.addressCountry,
+    },
+    areaServed: {
+      "@type": "City",
+      name: structuredData.areaServed,
+    },
+    medicalSpecialty: structuredData.medicalSpecialty,
+    knowsAbout: topicNames,
+    availableService: [
+      {
+        "@type": structuredData.treatmentServiceType,
+        name: home.title,
+        description: home.subtitle,
+      },
+      {
+        "@type": structuredData.diagnosticsServiceType,
+        name: structuredData.diagnosticsServiceName,
+        description: structuredData.diagnosticsServiceDescription,
+      },
+    ],
+    hasMap: practice.routeUrl,
+  };
+}
+
 export const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -88,48 +166,9 @@ export const websiteJsonLd = {
   },
 };
 
-export const practiceJsonLd = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "MedicalBusiness"],
-  "@id": `${baseUrl}/#practice`,
-  name: siteName,
-  description: defaultDescription,
-  url: baseUrl,
-  logo: absoluteUrl("/images/logo.png"),
-  image: [absoluteUrl("/images/maria.png"), absoluteUrl("/images/praxis2.png")],
-  email: contact.email,
-  telephone: contact.phone,
-  priceRange: "€€",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: practiceContent.address,
-    addressLocality: "Wien",
-    addressRegion: "Wien",
-    postalCode: "1010",
-    addressCountry: "AT",
-  },
-  areaServed: {
-    "@type": "City",
-    name: "Wien",
-  },
-  medicalSpecialty: "Clinical Psychology",
-  knowsAbout: [
-    ...focusAreas.map((area) => area.navTitle || area.title),
-    ...topicDetails.map((topic) => topic.title),
-  ],
-  availableService: [
-    {
-      "@type": "MedicalTherapy",
-      name: homeContent.title,
-      description: homeContent.subtitle,
-    },
-    {
-      "@type": "MedicalProcedure",
-      name: "Klinisch-psychologische Diagnostik",
-      description:
-        "Zeitnahe diagnostische Abklärung und klinisch-psychologische Diagnostik für Erwachsene.",
-    },
-  ],
-  hasMap:
-    "https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%2F14%201010%20Wien",
-};
+export const practiceJsonLd = createPracticeJsonLd({
+  settings: fallbackSiteSettings,
+  home: fallbackHomePage,
+  practice: fallbackPracticePage,
+  topics: fallbackTopicsPage,
+});

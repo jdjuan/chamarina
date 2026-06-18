@@ -1,10 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { contact } from "../content";
+import type { BookingWidgetSettings } from "../../sanity/types";
 
-const OFFISY_API_KEY = "60f36d12-789b-4af5-8f68-ddb1cb390d11";
-const OFFISY_SCRIPT_SRC = "https://buchen.offisy.at/api/booking/v1/app.js";
+const fallbackWidget: BookingWidgetSettings = {
+  apiKey: "60f36d12-789b-4af5-8f68-ddb1cb390d11",
+  scriptUrl: "https://buchen.offisy.at/api/booking/v1/app.js",
+  loadingText: "Terminbuchung wird geladen ...",
+  errorTextBeforeEmail:
+    "Die Terminbuchung konnte nicht geladen werden. Bitte kontaktieren Sie mich direkt unter",
+  errorTextAfterEmail: ".",
+};
 
 type AngularElement = {
   injector?: () => unknown;
@@ -43,15 +49,15 @@ function hasOffisyModule() {
   }
 }
 
-function loadOffisyScript() {
+function loadOffisyScript(scriptSrc: string) {
   document
-    .querySelectorAll<HTMLScriptElement>(`script[src="${OFFISY_SCRIPT_SRC}"]`)
+    .querySelectorAll<HTMLScriptElement>("script[data-offisy-booking='true']")
     .forEach((script) => script.remove());
 
   return new Promise<void>((resolve, reject) => {
     const script = document.createElement("script");
     script.async = true;
-    script.src = OFFISY_SCRIPT_SRC;
+    script.src = scriptSrc;
     script.dataset.offisyBooking = "true";
     script.addEventListener(
       "load",
@@ -66,11 +72,21 @@ function loadOffisyScript() {
   });
 }
 
-export function OffisyBookingWidget() {
+export function OffisyBookingWidget({
+  contactEmail,
+  widget,
+}: {
+  contactEmail: string;
+  widget: BookingWidgetSettings;
+}) {
   const calendarRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<"error" | "loading" | "ready">(
     "loading",
   );
+  const widgetSettings = {
+    ...fallbackWidget,
+    ...widget,
+  };
 
   useEffect(() => {
     const calendar = calendarRef.current;
@@ -98,7 +114,7 @@ export function OffisyBookingWidget() {
     setStatus("loading");
 
     window.offisy = {
-      apiKey: OFFISY_API_KEY,
+      apiKey: widgetSettings.apiKey,
       course: null,
       location: null,
       user: null,
@@ -125,7 +141,7 @@ export function OffisyBookingWidget() {
       }
     };
 
-    loadOffisyScript()
+    loadOffisyScript(widgetSettings.scriptUrl)
       .then(() => {
         window.setTimeout(() => {
           if (calendar.children.length > 0) {
@@ -150,24 +166,23 @@ export function OffisyBookingWidget() {
       observer.disconnect();
       calendar.innerHTML = "";
     };
-  }, []);
+  }, [widgetSettings.apiKey, widgetSettings.scriptUrl]);
 
   return (
     <div className="min-h-[520px] rounded-lg border border-[#B9CFDD] bg-white p-3 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-5">
       <div id="offisyCalendar" ref={calendarRef} />
       {status === "loading" ? (
         <p className="p-6 text-center text-sm font-medium text-[#53728A]">
-          Terminbuchung wird geladen ...
+          {widgetSettings.loadingText}
         </p>
       ) : null}
       {status === "error" ? (
         <p className="p-6 text-center text-sm font-medium text-[#53728A]">
-          Die Terminbuchung konnte nicht geladen werden. Bitte kontaktieren Sie
-          mich direkt unter{" "}
-          <a className="font-semibold text-[#0D2744]" href={`mailto:${contact.email}`}>
-            {contact.email}
+          {widgetSettings.errorTextBeforeEmail}{" "}
+          <a className="font-semibold text-[#0D2744]" href={`mailto:${contactEmail}`}>
+            {contactEmail}
           </a>
-          .
+          {widgetSettings.errorTextAfterEmail}
         </p>
       ) : null}
     </div>

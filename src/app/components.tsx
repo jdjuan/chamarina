@@ -4,17 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { contact, navItems } from "./content";
+import type { SiteSettings } from "../sanity/types";
 
-export function Header() {
+export function Header({ settings }: { settings: SiteSettings }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { navItems } = settings;
+  const { ui } = settings;
+  const logoSrc = settings.logo?.url || "/images/logo.png";
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#B9CFDD] bg-white/94 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-8 lg:px-10">
         <Link className="flex items-center gap-3" href="/">
           <Image
-            src="/images/logo.png"
+            src={logoSrc}
             alt=""
             width={64}
             height={64}
@@ -23,16 +26,16 @@ export function Header() {
           />
           <div>
             <p className="text-base font-semibold leading-none text-[#0D2744]">
-              Maria Chamarina, BA MSc
+              {settings.ownerName}
             </p>
             <p className="mt-1 text-xs text-[#53728A] sm:text-sm">
-              Klinische Psychologin
+              {settings.profession}
             </p>
           </div>
         </Link>
 
         <nav
-          aria-label="Hauptnavigation"
+          aria-label={ui.navigationLabel}
           className="hidden items-center gap-3 text-[0.78rem] font-medium text-[#0D2744] xl:flex xl:gap-4 xl:text-[0.82rem]"
         >
           {navItems.map((item) => (
@@ -46,16 +49,18 @@ export function Header() {
           ))}
           <Link
             className="whitespace-nowrap rounded-lg bg-[#FF929A] px-4 py-2.5 font-semibold text-[#0D2744] shadow-[0_12px_26px_rgba(255,146,154,0.28)] transition hover:bg-[#ff7f8a]"
-            href="/kontakt#online-buchung"
+            href={ui.headerCtaHref}
           >
-            kostenloses Erstgespräch
+            {ui.headerCtaLabel}
           </Link>
         </nav>
 
         <div className="relative xl:hidden">
           <button
             aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? "Navigation schließen" : "Navigation öffnen"}
+            aria-label={
+              mobileOpen ? ui.mobileMenuCloseLabel : ui.mobileMenuOpenLabel
+            }
             className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-lg border border-[#7691AD] text-xl text-[#0D2744]"
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
@@ -70,7 +75,7 @@ export function Header() {
           {mobileOpen ? (
             <div className="absolute right-0 top-14 w-[min(84vw,320px)] rounded-lg border border-[#B9CFDD] bg-white p-5 shadow-[0_22px_55px_rgba(13,39,68,0.16)]">
               <nav
-                aria-label="Mobile Hauptnavigation"
+                aria-label={ui.mobileNavigationLabel}
                 className="grid gap-3 text-base font-medium text-[#0D2744]"
               >
                 {navItems.map((item) => (
@@ -85,10 +90,10 @@ export function Header() {
                 ))}
                 <Link
                   className="mt-2 rounded-lg bg-[#FF929A] px-5 py-3 text-center text-sm font-semibold text-[#0D2744]"
-                  href="/kontakt#online-buchung"
+                  href={ui.headerCtaHref}
                   onClick={() => setMobileOpen(false)}
                 >
-                  kostenloses Erstgespräch
+                  {ui.headerCtaLabel}
                 </Link>
               </nav>
             </div>
@@ -99,32 +104,35 @@ export function Header() {
   );
 }
 
-export function Footer() {
+export function Footer({ settings }: { settings: SiteSettings }) {
+  const { contact } = settings;
+  const { ui } = settings;
+  const logoSrc = settings.logo?.url || "/images/logo.png";
+
   return (
     <footer className="bg-[#0D2744] px-5 py-12 text-white sm:px-8 lg:px-10">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <Link className="flex items-center gap-3" href="/">
             <Image
-              src="/images/logo.png"
+              src={logoSrc}
               alt=""
               width={56}
               height={56}
               className="h-12 w-12"
             />
             <div>
-              <p className="text-lg font-semibold">Maria Chamarina, BA MSc</p>
-              <p className="text-sm text-white/68">Klinische Psychologin</p>
+              <p className="text-lg font-semibold">{settings.ownerName}</p>
+              <p className="text-sm text-white/68">{settings.profession}</p>
             </div>
           </Link>
           <p className="mt-6 max-w-md leading-7 text-white/72">
-            Klinisch-psychologische Behandlung und Diagnostik für Erwachsene in
-            Wien.
+            {settings.defaultDescription}
           </p>
         </div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#B9CFDD]">
-            Kontakt
+            {ui.footerContactTitle}
           </p>
           <div className="mt-4 grid gap-2 text-white/78">
             <a
@@ -145,18 +153,20 @@ export function Footer() {
               rel="noopener noreferrer"
               target="_blank"
             >
-              WhatsApp
+              {ui.whatsappLabel}
             </a>
           </div>
         </div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#B9CFDD]">
-            Links
+            {ui.footerLinksTitle}
           </p>
           <div className="mt-4 grid gap-2 text-white/78">
-            <Link href="/faqs">FAQs</Link>
-            <Link href="/impressum">Impressum</Link>
-            <Link href="/kontakt">Kontakt</Link>
+            {ui.footerLinks.map((item) => (
+              <Link href={item.href} key={item.href}>
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -267,11 +277,13 @@ export function SoftCard({
   title,
   children,
   href,
+  learnMoreLabel = "Mehr erfahren ->",
   tone = "default",
 }: {
   title: string;
   children: ReactNode;
   href?: string;
+  learnMoreLabel?: string;
   tone?: SoftCardTone;
 }) {
   const content = (
@@ -282,7 +294,7 @@ export function SoftCard({
       <div className="mt-4 leading-7 text-[#53728A]">{children}</div>
       {href ? (
         <p className="mt-6 text-sm font-semibold text-[#53728A]">
-          Mehr erfahren -&gt;
+          {learnMoreLabel}
         </p>
       ) : null}
     </article>

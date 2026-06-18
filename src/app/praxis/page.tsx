@@ -1,21 +1,44 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { CTA, PageHero, SoftCard } from "../components";
-import { practiceContent } from "../content";
 import { createPageMetadata } from "../seo";
+import { getPracticePage, getSiteSettings } from "../../sanity/content";
+import { imageAlt, imageUrl } from "../../sanity/image";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Praxis & Anfahrt",
-  description:
-    "Adresse, Anfahrt und Termin-Hinweise zur Praxis Chamarina in der Fischerstiege 10/14 im 1. Bezirk in Wien.",
-  path: "/praxis",
-  image: "/images/praxis2.png",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const [practiceContent, settings] = await Promise.all([
+    getPracticePage(),
+    getSiteSettings(),
+  ]);
 
-export default function PraxisPage() {
+  return createPageMetadata({
+    title: practiceContent.seo?.title || "Praxis & Anfahrt",
+    description:
+      practiceContent.seo?.description ||
+      "Adresse, Anfahrt und Termin-Hinweise zur Praxis Chamarina in der Fischerstiege 10/14 im 1. Bezirk in Wien.",
+    path: "/praxis",
+    image: imageUrl(
+      practiceContent.seo?.image || practiceContent.images[0],
+      "/images/praxis4.jpg",
+    ),
+    imageAlt:
+      practiceContent.seo?.imageAlt ||
+      imageAlt(
+        practiceContent.seo?.image || practiceContent.images[0],
+        "Praxisraum der Praxis Chamarina",
+      ),
+    metadataSiteName: settings.siteName,
+  });
+}
+
+export default async function PraxisPage() {
+  const practiceContent = await getPracticePage();
+  const primaryImage = practiceContent.images[0];
+  const galleryImages = practiceContent.images.slice(1);
+
   return (
     <main>
-      <PageHero eyebrow="Praxis im 1. Bezirk" title={practiceContent.title}>
+      <PageHero eyebrow={practiceContent.heroEyebrow} title={practiceContent.title}>
         <p>{practiceContent.addressText}</p>
       </PageHero>
 
@@ -28,13 +51,13 @@ export default function PraxisPage() {
               </p>
               <p className="mt-3">{practiceContent.addressText}</p>
               <a
-                aria-label="Route zur Praxis Chamarina in Google Maps öffnen"
+                aria-label={practiceContent.routeAriaLabel}
                 className="mt-5 inline-flex font-semibold text-[#53728A]"
-                href="https://www.google.com/maps/search/?api=1&query=Fischerstiege%2010%2F14%201010%20Wien"
+                href={practiceContent.routeUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                Route öffnen -&gt;
+                {practiceContent.routeLabel}
               </a>
             </SoftCard>
             <SoftCard title={practiceContent.directionsTitle} tone="blue">
@@ -56,33 +79,41 @@ export default function PraxisPage() {
           <div className="grid gap-5">
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-[0_22px_55px_rgba(13,39,68,0.14)]">
               <Image
-                src="/images/praxis2.png"
-                alt="Sitzbereich der Praxis mit hellen Fenstern"
+                src={imageUrl(primaryImage, "/images/praxis4.jpg")}
+                alt={imageAlt(primaryImage, "Praxisraum der Praxis Chamarina")}
                 fill
                 sizes="(min-width: 1024px) 56vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                <Image
-                  src="/images/praxis1.png"
-                  alt="Praxisraum mit Sesseln, Pflanzen und Flipchart"
-                  fill
-                  sizes="(min-width: 1024px) 28vw, 100vw"
-                  className="object-cover"
-                />
+            {galleryImages.length > 0 ? (
+              <div
+                className={
+                  galleryImages.length === 1
+                    ? "grid gap-5"
+                    : "grid gap-5 sm:grid-cols-2"
+                }
+              >
+                {galleryImages.map((galleryImage, index) => (
+                  <div
+                    className="relative aspect-[4/3] overflow-hidden rounded-lg"
+                    key={galleryImage.url || galleryImage.asset?._ref || index}
+                  >
+                    <Image
+                      src={imageUrl(galleryImage, "/images/praxis5.jpg")}
+                      alt={imageAlt(galleryImage, "Praxisraum der Praxis Chamarina")}
+                      fill
+                      sizes={
+                        galleryImages.length === 1
+                          ? "(min-width: 1024px) 56vw, 100vw"
+                          : "(min-width: 1024px) 28vw, 100vw"
+                      }
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                <Image
-                  src="/images/praxis3.png"
-                  alt="Wartebereich mit zwei Sesseln und Bildern"
-                  fill
-                  sizes="(min-width: 1024px) 28vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </section>
@@ -98,7 +129,7 @@ export default function PraxisPage() {
           </SoftCard>
         </div>
         <div className="mx-auto mt-10 max-w-7xl">
-          <CTA href="/kontakt#online-buchung">Termin anfragen</CTA>
+          <CTA href={practiceContent.ctaHref}>{practiceContent.ctaLabel}</CTA>
         </div>
       </section>
     </main>

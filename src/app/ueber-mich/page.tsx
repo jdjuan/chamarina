@@ -1,19 +1,41 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { CTA, PageHero } from "../components";
-import { aboutContent, educationItems } from "../content";
 import { createPageMetadata } from "../seo";
+import { getAboutPage, getSiteSettings } from "../../sanity/content";
+import { imageAlt, imageUrl } from "../../sanity/image";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Über mich",
-  description:
-    "Über Maria Chamarina, klinische Psychologin in Wien, ihre Arbeitsweise, ihren beruflichen Hintergrund und ihre Erfahrung.",
-  path: "/ueber-mich",
-  image: "/images/maria.png",
-  imageAlt: "Maria Chamarina, klinische Psychologin in Wien",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const [aboutContent, settings] = await Promise.all([
+    getAboutPage(),
+    getSiteSettings(),
+  ]);
 
-export default function UeberMichPage() {
+  return createPageMetadata({
+    title: aboutContent.seo?.title || "Über mich",
+    description:
+      aboutContent.seo?.description ||
+      "Über Maria Chamarina, klinische Psychologin in Wien, ihre Arbeitsweise, ihren beruflichen Hintergrund und ihre Erfahrung.",
+    path: "/ueber-mich",
+    image: imageUrl(
+      aboutContent.seo?.image || aboutContent.portraitImage,
+      "/images/maria.png",
+    ),
+    imageAlt:
+      aboutContent.seo?.imageAlt ||
+      imageAlt(
+        aboutContent.seo?.image || aboutContent.portraitImage,
+        "Maria Chamarina, klinische Psychologin in Wien",
+      ),
+    metadataSiteName: settings.siteName,
+  });
+}
+
+export default async function UeberMichPage() {
+  const aboutContent = await getAboutPage();
+  const portraitImage = imageUrl(aboutContent.portraitImage, "/images/maria.png");
+  const portraitAlt = imageAlt(aboutContent.portraitImage, "Maria Chamarina");
+
   return (
     <main>
       <PageHero eyebrow={aboutContent.title} title={aboutContent.workTitle} />
@@ -22,8 +44,8 @@ export default function UeberMichPage() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-[#B9CFDD] shadow-[0_22px_55px_rgba(13,39,68,0.14)]">
             <Image
-              src="/images/maria.png"
-              alt="Maria Chamarina"
+              src={portraitImage}
+              alt={portraitAlt}
               fill
               priority
               sizes="(min-width: 1024px) 36vw, 100vw"
@@ -38,7 +60,7 @@ export default function UeberMichPage() {
               </p>
             ))}
             <div className="mt-8">
-              <CTA href="/kontakt">Kontakt aufnehmen</CTA>
+              <CTA href={aboutContent.ctaHref}>{aboutContent.ctaLabel}</CTA>
             </div>
           </div>
         </div>
@@ -47,14 +69,14 @@ export default function UeberMichPage() {
       <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#53728A]">
-            Erfahrung
+            {aboutContent.educationEyebrow}
           </p>
           <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
             {aboutContent.educationTitle}
           </h2>
           <article className="mt-10 rounded-lg border border-[#B9CFDD] border-l-[10px] border-l-[#FF929A] bg-white p-7 shadow-[0_18px_48px_rgba(13,39,68,0.08)] sm:p-9">
             <ul className="grid gap-4 text-lg leading-8 text-[#53728A]">
-              {educationItems.map((item) => (
+              {aboutContent.educationItems.map((item) => (
                 <li className="flex gap-3" key={item}>
                   <span aria-hidden="true" className="text-[#FF929A]">
                     •

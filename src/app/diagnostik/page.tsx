@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { CTA, PageHero } from "../components";
-import { diagnosticsContent } from "../content";
 import { createPageMetadata } from "../seo";
+import { getDiagnosticsPage, getSiteSettings } from "../../sanity/content";
+import { imageAlt, imageUrl } from "../../sanity/image";
 
 const diagnosticStepStyles = [
   "border-[#FF929A]/45 bg-[#FF929A]/10",
@@ -10,18 +11,36 @@ const diagnosticStepStyles = [
   "border-[#7691AD] bg-[#B9CFDD]/25",
 ];
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Klinisch-psychologische Diagnostik",
-  description:
-    "Klinisch-psychologische Diagnostik für Erwachsene in Wien mit Gespräch, Testverfahren, Rückmeldung und Befund oder Gutachten.",
-  path: "/diagnostik",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const [diagnosticsContent, settings] = await Promise.all([
+    getDiagnosticsPage(),
+    getSiteSettings(),
+  ]);
 
-export default function DiagnostikPage() {
+  return createPageMetadata({
+    title: diagnosticsContent.seo?.title || "Klinisch-psychologische Diagnostik",
+    description:
+      diagnosticsContent.seo?.description ||
+      "Klinisch-psychologische Diagnostik für Erwachsene in Wien mit Gespräch, Testverfahren, Rückmeldung und Befund oder Gutachten.",
+    path: "/diagnostik",
+    image: imageUrl(diagnosticsContent.seo?.image, "/images/praxis4.jpg"),
+    imageAlt:
+      diagnosticsContent.seo?.imageAlt ||
+      imageAlt(
+        diagnosticsContent.seo?.image,
+        "Praxisraum der Praxis Chamarina in Wien",
+      ),
+    metadataSiteName: settings.siteName,
+  });
+}
+
+export default async function DiagnostikPage() {
+  const diagnosticsContent = await getDiagnosticsPage();
+
   return (
     <main>
       <PageHero
-        eyebrow="Klarheit gewinnen"
+        eyebrow={diagnosticsContent.heroEyebrow}
         title={diagnosticsContent.title}
       >
         <p>{diagnosticsContent.paragraphs[0]}</p>
@@ -34,7 +53,7 @@ export default function DiagnostikPage() {
               {diagnosticsContent.includesTitle}
             </p>
             <h2 className="mt-4 text-4xl font-semibold text-[#0D2744]">
-              Klinisch-psychologische Diagnostik
+              {diagnosticsContent.includesHeading}
             </h2>
             <div className="mt-5 grid gap-4 leading-8 text-[#53728A]">
               {diagnosticsContent.paragraphs.slice(1).map((paragraph) => (
@@ -56,7 +75,7 @@ export default function DiagnostikPage() {
                 {diagnosticsContent.costTitle}
               </p>
               <p className="mt-2 text-4xl font-semibold text-white">
-                500 €
+                {diagnosticsContent.costAmount}
               </p>
               <p className="mt-3 leading-7 text-[#B9CFDD]">
                 {diagnosticsContent.cost}
@@ -104,13 +123,12 @@ export default function DiagnostikPage() {
 
       <section className="px-5 pb-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl rounded-lg bg-[#0D2744] p-8 text-white sm:p-10">
-          <h2 className="text-3xl font-semibold">Diagnostik anfragen</h2>
+          <h2 className="text-3xl font-semibold">{diagnosticsContent.ctaTitle}</h2>
           <p className="mt-4 max-w-2xl leading-8 text-white/76">
-            Ich biete klinisch-psychologische Diagnostik für Privatpersonen
-            sowie für zuweisende Kolleg:innen an.
+            {diagnosticsContent.ctaText}
           </p>
           <div className="mt-7">
-            <CTA href="/kontakt">Kontakt aufnehmen</CTA>
+            <CTA href="/kontakt">{diagnosticsContent.ctaLabel}</CTA>
           </div>
         </div>
       </section>
