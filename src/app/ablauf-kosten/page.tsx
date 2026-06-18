@@ -3,7 +3,7 @@ import { CTA, PageHero, SoftCard } from "../components";
 import { practiceContent, processContent } from "../content";
 import { createPageMetadata } from "../seo";
 
-const processStepTones = ["rose", "blue", "green"] as const;
+const processStepTones = ["rose", "blue", "mist"] as const;
 
 export const metadata: Metadata = createPageMetadata({
   title: "Ablauf & Kosten",
@@ -61,7 +61,7 @@ export default function AblaufKostenPage() {
 
       <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
-          <SoftCard title={processContent.costTitle} tone="amber">
+          <SoftCard title={processContent.costTitle} tone="deep">
             <ul className="grid gap-2">
               {processContent.costs.map((item) => (
                 <li className="text-2xl font-semibold text-[#0D2744]" key={item}>
@@ -77,7 +77,7 @@ export default function AblaufKostenPage() {
               ))}
             </div>
           </SoftCard>
-          <SoftCard title={processContent.insuranceTitle} tone="green">
+          <SoftCard title={processContent.insuranceTitle} tone="mist">
             <div className="grid gap-3">
               {processContent.insuranceParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

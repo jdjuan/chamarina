@@ -37,7 +37,7 @@ export default function KontaktPage() {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <SoftCard title="WhatsApp" tone="green">
+            <SoftCard title="WhatsApp" tone="mist">
               <p>Kurze Terminfragen können Sie auch per WhatsApp stellen.</p>
               <p className="mt-3 text-2xl font-semibold text-[#0D2744]">
                 {contact.phone}

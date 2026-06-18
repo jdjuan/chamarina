@@ -89,7 +89,7 @@ export default function PraxisPage() {
 
       <section className="bg-[#B9CFDD]/35 px-5 py-20 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <SoftCard title={practiceContent.appointmentTitle} tone="green">
+          <SoftCard title={practiceContent.appointmentTitle} tone="mist">
             <div className="grid gap-3">
               {practiceContent.appointmentParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

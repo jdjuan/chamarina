@@ -4,10 +4,10 @@ import { diagnosticsContent } from "../content";
 import { createPageMetadata } from "../seo";
 
 const diagnosticStepStyles = [
-  "border-[#F6B0B6] bg-[#FFF4F5]",
-  "border-[#B9CFDD] bg-[#F4F8FB]",
-  "border-[#B7D8C7] bg-[#F1FAF5]",
-  "border-[#E6C66A] bg-[#FFF9E8]",
+  "border-[#FF929A]/45 bg-[#FF929A]/10",
+  "border-[#B9CFDD] bg-[#B9CFDD]/20",
+  "border-[#B9CFDD] bg-[#B9CFDD]/35",
+  "border-[#7691AD] bg-[#B9CFDD]/25",
 ];
 
 export const metadata: Metadata = createPageMetadata({

@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { contact, focusAreas, homeContent, practiceContent } from "./content";
+import {
+  contact,
+  focusAreas,
+  homeContent,
+  practiceContent,
+  topicDetails,
+} from "./content";
 
 export const siteName = "Praxis Chamarina";
 export const baseUrl = (
@@ -107,7 +113,10 @@ export const practiceJsonLd = {
     name: "Wien",
   },
   medicalSpecialty: "Clinical Psychology",
-  knowsAbout: focusAreas.map((area) => area.navTitle || area.title),
+  knowsAbout: [
+    ...focusAreas.map((area) => area.navTitle || area.title),
+    ...topicDetails.map((topic) => topic.title),
+  ],
   availableService: [
     {
       "@type": "MedicalTherapy",

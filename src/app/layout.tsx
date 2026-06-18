@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { Footer, Header } from "./components";
 import "./globals.css";
 import {
@@ -115,6 +116,19 @@ export default function RootLayout({
           }}
         />
       </body>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-EMH5Z30Z4D"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-EMH5Z30Z4D');
+        `}
+      </Script>
     </html>
   );
 }

@@ -255,10 +255,10 @@ export function CTA({
 
 const softCardTones = {
   default: "border-[#B9CFDD] border-l-[#FF929A] bg-white",
-  rose: "border-[#F6B0B6] border-l-[#FF929A] bg-[#FFF4F5]",
-  blue: "border-[#B9CFDD] border-l-[#53728A] bg-[#F4F8FB]",
-  green: "border-[#B7D8C7] border-l-[#5D9475] bg-[#F1FAF5]",
-  amber: "border-[#E6C66A] border-l-[#D7A52E] bg-[#FFF9E8]",
+  rose: "border-[#FF929A]/45 border-l-[#FF929A] bg-[#FF929A]/10",
+  blue: "border-[#B9CFDD] border-l-[#53728A] bg-[#B9CFDD]/20",
+  mist: "border-[#B9CFDD] border-l-[#7691AD] bg-[#B9CFDD]/35",
+  deep: "border-[#7691AD] border-l-[#0D2744] bg-[#B9CFDD]/25",
 };
 
 type SoftCardTone = keyof typeof softCardTones;

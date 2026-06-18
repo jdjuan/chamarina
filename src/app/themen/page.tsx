@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { CTA, PageHero } from "../components";
-import { focusAreas } from "../content";
+import { focusAreas, getTopicsByCategory } from "../content";
 import { createPageMetadata } from "../seo";
+import { TopicTooltips } from "./topic-tooltips";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Themen & Schwerpunkte",
@@ -40,22 +41,7 @@ export default function ThemenPage() {
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>
-                {area.items ? (
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {area.items.map((item) => (
-                      <span
-                        className="inline-flex items-center gap-2 rounded-lg border border-[#B9CFDD] bg-[#B9CFDD]/35 px-3.5 py-2 text-sm font-medium text-[#0D2744] shadow-[0_10px_24px_rgba(13,39,68,0.06)]"
-                        key={item}
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="h-1.5 w-1.5 rounded-full bg-[#FF929A]"
-                        />
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
+                <TopicTooltips topics={getTopicsByCategory(area.category)} />
                 {area.closing ? (
                   <p className="mt-5 leading-8 text-[#53728A]">
                     {area.closing}
