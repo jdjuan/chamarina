@@ -19,6 +19,8 @@ import {
 import { imageUrl } from "../sanity/image";
 import { SanityLive } from "../sanity/live";
 
+export const dynamic = "force-dynamic";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
