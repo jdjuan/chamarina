@@ -84,6 +84,7 @@ export type TopicDetail = {
   category: TopicCategory;
   summary: string;
   detail: string[];
+  examplesLabel?: string;
   examples?: string[];
 };
 
@@ -269,6 +270,7 @@ export const topicDetails: TopicDetail[] = [
       "Bedürfnis nach absoluter Gewissheit",
       "Befürchtung, etwas Falsches gesagt oder getan zu haben",
     ],
+    examplesLabel: "Zum Beispiel:",
   },
   {
     slug: "zwangshandlungen",
@@ -286,9 +288,9 @@ export const topicDetails: TopicDetail[] = [
       "Ordnen und Symmetrie herstellen",
       "Wiederholtes Nachfragen",
       "Zählen oder Wiederholen bestimmter Wörter",
-      "Gedanken neutralisieren",
-      "Inneres Kontrollieren oder Überprüfen",
+      "Gedanken „neutralisieren“",
     ],
+    examplesLabel: "Beispiele:",
   },
   {
     slug: "antriebslosigkeit",
